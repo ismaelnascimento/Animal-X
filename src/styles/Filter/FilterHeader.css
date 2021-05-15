@@ -1,0 +1,119 @@
+.animalX--filter {
+  width: 100%;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+  position: relative;
+  bottom: -50px;
+}
+
+.animalX--filter__categorys {
+  display: flex;
+  align-items: center;
+}
+
+.animalX--filter__categorys > button {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  outline: none;
+  width: 151px;
+  height: 36px;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 17px 17px 0px 0px;
+}
+
+.animalX--filter__types {
+  display: flex;
+  height: 58px;
+  align-items: center;
+  width: 90%;
+  background-color: #99d4ff;
+}
+
+.animalX--filter__types-filters {
+  display: flex;
+  align-items: center;
+}
+
+.animalX--filter__types-search {
+  background: #f7b803;
+  border-radius: 53px;
+  width: 220px;
+  min-width: 220px;
+  max-width: 220px;
+  height: 66px;
+  position: relative;
+  margin-left: auto;
+  right: -60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.animalX--filter__types-search:hover {
+  background: #ebb208;
+}
+
+.animalX--filter__types-search:active {
+  transform: scale(0.97);
+}
+
+.animalX--filter__types-search > p {
+  font-size: 20px;
+  color: #ffffff;
+  margin-left: 10px;
+}
+
+/** BTN FILTERS **/
+
+.animalX--buttonFilter {
+  display: flex;
+  align-items: center;
+  padding: 0px 38px;
+  height: 34px;
+  position: relative;
+  cursor: pointer;
+  background-color: #99d4ff;
+  transition: all 0.3s ease;
+  border-right: 2px solid rgba(180, 186, 203, 0.8);
+}
+
+.animalX--buttonFilter > p {
+  font-size: 17.5px;
+  color: #424960;
+  margin-right: 10px;
+}
+
+.animalX--buttonFilter-active {
+  position: absolute;
+  top: 45px;
+  width: 100%;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+  border-radius: 10px;
+  z-index: 1;
+  background-color: #ffffff;
+  box-shadow: 0 0 28px 8px rgba(158, 158, 158, 0.123);
+}
+
+.animalX--buttonFilter-active > p {
+  cursor: pointer;
+  padding: 14px 18px;
+  transition: all 0.3s ease;
+  background: rgb(255, 255, 255);
+  font-size: 17px;
+  color: #383c49;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.animalX--buttonFilter-active > p:hover {
+  background: rgb(245, 244, 244);
+}

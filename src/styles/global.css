@@ -15,3 +15,7 @@ body {
   display: flex;
   flex-direction: column;
 }
+
+button:active {
+  transform: scale(0.97);
+}
