@@ -169,8 +169,10 @@
 }
 
 .animalX--header__left-pets-cachorro {
-  left: 180px;
+  left: 100px;
   position: relative;
+  z-index: 1;
+  bottom: -10px;
 }
 
 @media (max-width: 778px) {
