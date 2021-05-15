@@ -13,7 +13,7 @@ function Arrow({ ...res }) {
       <path
         d="M14.6257 6.81287L7.81287 13.6257L1 6.81287"
         stroke="#F7B803"
-        stroke-width="2"
+        strokeWidth="2"
       />
     </svg>
   );

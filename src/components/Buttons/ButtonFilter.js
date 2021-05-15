@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 //
-import Arrow from "../../assets/images/icons/Arrow";
+import Arrow from "../../assets/icons/Arrow";
 
 function ButtonFilter(props) {
   const [arrow, setArrow] = useState(false);
@@ -28,8 +28,8 @@ function ButtonFilter(props) {
         onClick={() => setArrow(false)}
         className="animalX--buttonFilter-active"
       >
-        {props.items.map((item) => (
-          <p>{item}</p>
+        {props.items.map((item, i) => (
+          <p key={i}>{item}</p>
         ))}
       </div>
     </div>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //
 import "../../styles/Filter/FilterHeader.css";
@@ -7,7 +7,7 @@ import { useStateValue } from "../../providers/StateProvider";
 
 //
 import ButtonFilter from "../Buttons/ButtonFilter";
-import Search from "../../assets/images/icons/Search";
+import Search from "../../assets/icons/Search";
 
 function FilterHeader() {
   const [{ activeCategory }, dispatch] = useStateValue();
@@ -20,8 +20,9 @@ function FilterHeader() {
   return (
     <div className="animalX--filter">
       <div className="animalX--filter__categorys">
-        {categorys.map((category) => (
+        {categorys.map((category, i) => (
           <button
+            key={i}
             style={{
               background: activeCategory === category ? "#99D4FF" : "#B4BACB",
               fontWeight: activeCategory === category ? "500" : "400",

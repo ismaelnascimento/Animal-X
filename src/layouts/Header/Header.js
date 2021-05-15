@@ -25,7 +25,7 @@ function Header() {
 
         <div className="animalX--header__left-pets">
           <img src={Gato} alt={"Gato"} />
-          <img style={{ position: 'relative', right: '-70px' }} src={Cachorro} alt={"Cachorro"} />
+          <img className="animalX--header__left-pets-cachorro" src={Cachorro} alt={"Cachorro"} />
         </div>
 
         <FilterHeader />
