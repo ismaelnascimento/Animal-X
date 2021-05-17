@@ -101,31 +101,8 @@ const BackLeft = ({ ...res }) => (
   </svg>
 );
 
-function useOnClickOutside(ref, handler) {
-  useEffect(() => {
-    const listener = (event) => {
-      // Do nothing if clicking ref's element or descendent elements
-      if (!ref.current || ref.current.contains(event.target)) {
-        return;
-      }
-
-      handler(event);
-    };
-
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
-
-    return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
-    };
-  }, [ref, handler]);
-}
-
 function CardPet(props) {
-  const modalRef = useRef();
   const [modalShare, setModalShare] = useState(false);
-  useOnClickOutside(modalRef, () => setModalShare(false));
 
   var map = `https://www.google.com/maps/place/${props.cidade} ${props.estado}`;
 
@@ -213,7 +190,7 @@ function CardPet(props) {
 
       {modalShare ? (
         <div className="animalX--modal">
-          <div ref={modalRef} className="animalX--modal-share">
+          <div className="animalX--modal-share">
             <div className="animalX--modal-share__header">
               <BackLeft onClick={() => setModalShare(false)} />
 
