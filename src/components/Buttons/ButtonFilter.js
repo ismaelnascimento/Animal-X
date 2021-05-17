@@ -30,6 +30,7 @@ function ButtonFilter(props) {
 
       <div
         onClick={() => setArrow(false)}
+        style={{ left: props.name === "Localização" ? "-100px" : "" }}
         className="animalX--buttonFilter-active"
       >
         {props.items.map((item, i) => (

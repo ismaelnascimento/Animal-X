@@ -1,0 +1,81 @@
+.animalX--modal {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  display: flex;
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(3px);
+  background-color: rgba(0, 0, 0, 0.295);
+}
+
+.animalX--modal-share {
+  width: 400px;
+  position: absolute;
+  margin: auto;
+  height: auto;
+  overflow: hidden;
+  border-radius: 10px;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.animalX--modal-share__header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55px;
+}
+
+.animalX--modal-share__header > p {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.animalX--modal-share__header > svg {
+  position: absolute;
+  left: 17px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.animalX--modal-share__header > svg:hover {
+  opacity: 0.6;
+  transform: scale(1.1);
+}
+
+.animalX--modal-share__content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding-bottom: 8px;
+}
+
+.animalX--modal-share__content > div {
+  display: flex;
+  align-items: center;
+  transition: all 0.3s ease;
+  padding: 15px 20px;
+  cursor: pointer;
+}
+
+.animalX--modal-share__content > div:hover {
+  background-color: rgb(247, 246, 246);
+}
+
+.animalX--modal-share__content > div > svg {
+  width: 28px;
+  height: 28px;
+  margin-right: 12px;
+}
+
+.animalX--modal-share__content > div > p {
+  font-style: 16px;
+  font-weight: 400;
+  color: rgb(63, 63, 63);
+}

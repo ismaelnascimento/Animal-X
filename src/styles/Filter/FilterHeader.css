@@ -93,7 +93,7 @@
 .animalX--buttonFilter-active {
   position: absolute;
   top: 45px;
-  width: 100%;
+  width: 245px;
   left: 0;
   right: 0;
   overflow: hidden;
@@ -254,12 +254,12 @@
     display: flex;
   }
   .animalX--filter__categorys > button {
-    width: 105px;
+    width: 110px;
     height: 35px;
     font-size: 14px;
   }
   .animalX--buttonFilter {
-    padding: 0px 12px;
+    padding: 0px 17px;
     width: auto;
     height: 30px;
   }

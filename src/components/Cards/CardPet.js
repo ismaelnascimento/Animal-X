@@ -1,7 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
+
+//
+import { SiFacebook, SiTwitter, SiWhatsapp } from "react-icons/si";
 
 //
 import WhatsApp from "../../assets/icons/WhatsApp";
+
+//
+import "../../styles/Modal/Modal.css";
 
 const Feminino = () => (
   <svg
@@ -68,8 +74,43 @@ const Share = ({ ...res }) => (
   </svg>
 );
 
+const BackLeft = ({ ...res }) => (
+  <svg
+    {...res}
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      opacity="0.4"
+      d="M4.25 12.2744L19.25 12.2744"
+      stroke="#130F26"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+    <path
+      d="M10.2998 18.2988L4.2498 12.2748L10.2998 6.24976"
+      stroke="#130F26"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    />
+  </svg>
+);
+
 function CardPet(props) {
+  const [modalShare, setModalShare] = useState(false);
+
   var map = `https://www.google.com/maps/place/${props.cidade} ${props.estado}`;
+
+  var urlWEB = `https://animal--x.web.app`;
+
+  var facebook = `https://www.facebook.com/sharer/sharer.php?u=${urlWEB}`;
+  var whatsapp = `https://api.whatsapp.com/send?text=Ola vim do *Animal X* (${urlWEB}), eu encontrei um _${props.especie}_ chamado *${props.apelido}*`;
+  var twitter = `https://twitter.com/intent/tweet?url=${urlWEB}&text=Ola vim do Animal X, eu encontrei um ${props.especie} chamado ${props.apelido}`;
 
   return (
     <div className="animalX--card__pet">
@@ -106,7 +147,10 @@ function CardPet(props) {
               onClick={() => window.open(map)}
               style={{ marginLeft: "10px" }}
             />
-            <Share style={{ marginLeft: "15px" }} />
+            <Share
+              onClick={() => setModalShare(true)}
+              style={{ marginLeft: "15px" }}
+            />
           </div>
 
           <div className="animalX--card__pet-content-infos__description">
@@ -116,7 +160,7 @@ function CardPet(props) {
       </div>
 
       <a
-        href={`https://api.whatsapp.com/send?phone=${props.whatsapp}&text=Ola vim do *Animal X*, eu encontrei um _${props.especie}_ chamado *${props.apelido}* e eu queria adotar ele, Poderia me ajudar?`}
+        href={`https://api.whatsapp.com/send?phone=${props.whatsapp}&text=Ola vim do *Animal X* (${urlWEB}), eu encontrei um _${props.especie}_ chamado *${props.apelido}* e eu queria adotar ele, Poderia me ajudar?`}
         className="animalX--card__pet-whatsapp"
         target="_blanck"
       >
@@ -143,6 +187,38 @@ function CardPet(props) {
           />
         </svg>
       </div>
+
+      {modalShare ? (
+        <div className="animalX--modal">
+          <div className="animalX--modal-share">
+            <div className="animalX--modal-share__header">
+              <BackLeft onClick={() => setModalShare(false)} />
+
+              <p>Compartilhar para...</p>
+            </div>
+
+            <div className="animalX--modal-share__content">
+              <div onClick={() => window.open(facebook)}>
+                <SiFacebook />
+
+                <p>Compartilhar no Facebook</p>
+              </div>
+              <div onClick={() => window.open(twitter)}>
+                <SiTwitter />
+
+                <p>Compartilhar no Twitter</p>
+              </div>
+              <div onClick={() => window.open(whatsapp)}>
+                <SiWhatsapp />
+
+                <p>Compartilhar no Whatsapp</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
