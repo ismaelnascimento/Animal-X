@@ -69,6 +69,8 @@ const Share = ({ ...res }) => (
 );
 
 function CardPet(props) {
+  var map = `https://www.google.com/maps/place/${props.cidade} ${props.estado}`;
+
   return (
     <div className="animalX--card__pet">
       <div className="animalX--card__pet-image">
@@ -100,7 +102,10 @@ function CardPet(props) {
               </div>
             ))}
 
-            <Location style={{ marginLeft: "10px" }} />
+            <Location
+              onClick={() => window.open(map)}
+              style={{ marginLeft: "10px" }}
+            />
             <Share style={{ marginLeft: "15px" }} />
           </div>
 
@@ -113,6 +118,7 @@ function CardPet(props) {
       <a
         href={`https://api.whatsapp.com/send?phone=${props.whatsapp}&text=Ola vim do *Animal X*, eu encontrei um _${props.especie}_ chamado *${props.apelido}* e eu queria adotar ele, Poderia me ajudar?`}
         className="animalX--card__pet-whatsapp"
+        target="_blanck"
       >
         <WhatsApp />
       </a>

@@ -50,13 +50,16 @@ function FilterHeader() {
               "Gato manês",
               "Vira-lata",
             ]}
+            borderRight={""}
           />
           <ButtonFilter
             name={"Idade"}
+            borderRight={""}
             items={["5 anos", "2 anos", "3 meses"]}
           />
           <ButtonFilter
             name={"Localização"}
+            borderRight={"1px solid rgba(0, 0, 0, 0)"}
             items={["Ceará, Brasil", "São Paulo, Brasil"]}
           />
         </div>

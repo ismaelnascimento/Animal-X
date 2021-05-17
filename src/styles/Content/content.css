@@ -117,22 +117,3 @@
   position: absolute;
   bottom: -32px;
 }
-
-@media (max-width: 782px) {
-  .animalX--header__right > img {
-    display: none;
-  }
-  .animalX--header__right {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    height: fit-content;
-  }
-  .animalX--header__left > img {
-    width: 290px;
-    margin-top: 70px;
-  }
-  .animalX--header__pata > img {
-      width: 100px;
-  }
-}
