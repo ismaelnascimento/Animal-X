@@ -15,7 +15,7 @@
 
 .animalX--modal-share {
   width: 400px;
-  position: absolute;
+  position: fixed;
   margin: auto;
   height: auto;
   overflow: hidden;
