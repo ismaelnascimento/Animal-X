@@ -43,28 +43,30 @@ function Content() {
   }, [pets]);
 
   const filterPets = useMemo(() => {
-    if (searchPets === "") {
+    if (searchPets === "" && filter === "") {
       return pets?.filter((pet) => {
         return pet?.categoria === activeCategory;
       });
-    }else if(filter!=={}){
-      if(filter?.type === 'Raça') {
-        return pets?.filter((pet) => {
-          return pet?.apelido===searchPets;
-        });
-      }else if(filter?.type === 'Raça') {
-        return pets?.filter((pet) => {
-          return pet?.apelido?.toLowerCase()?.includes(searchPets?.toLowerCase());
-        });
-      } else {
-        return pets?.filter((pet) => {
-          return pet?.apelido?.toLowerCase()?.includes(searchPets?.toLowerCase());
-        });
-      }
-    } else {
+    } else if (searchPets !== "") {
       return pets?.filter((pet) => {
         return pet?.apelido?.toLowerCase()?.includes(searchPets?.toLowerCase());
       });
+    } else if (filter !== "") {
+      if (filter?.type === "Raça") {
+        return pets?.filter((pet) => {
+          return pet?.raca === filter?.state;
+        });
+      } else if (filter?.type === "Localização") {
+        return pets?.filter((pet) => {
+          var local = `${pet.cidade} ${pet.estado}`;
+
+          return local?.toLowerCase().includes(filter?.state?.toLowerCase());
+        });
+      } else {
+        return pets?.filter((pet) => {
+          return pet?.idade === filter?.state;
+        });
+      }
     }
   }, [activeCategory, getPets, searchPets, filter]);
 

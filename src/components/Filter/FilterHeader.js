@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 
 //
 import "../../styles/Filter/FilterHeader.css";
@@ -9,16 +9,77 @@ import { useStateValue } from "../../providers/StateProvider";
 import ButtonFilter from "../Buttons/ButtonFilter";
 import Search from "../../assets/icons/Search";
 
+function useOnClickOutside(ref, handler) {
+  useEffect(() => {
+    const listener = (event) => {
+      // Do nothing if clicking ref's element or descendent elements
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+
+      handler(event);
+    };
+
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [ref, handler]);
+}
+
 function FilterHeader() {
   const [{ activeCategory }, dispatch] = useStateValue();
+  const [{}, dispatchSearch] = useStateValue();
+  const [modalSearch, setModalSearch] = useState(false);
+  const [search, setSearch] = useState("");
+
+  const modalRef = useRef();
+
+  useOnClickOutside(modalRef, () => setModalSearch(false));
+
   const [categorys, setCategorys] = useState([
     "Gatos",
     "Cachorros",
     "Outros Pets",
   ]);
 
+  const searchSubmit = (e) => {
+    dispatchSearch({
+      type: "SET_SEARCH_PETS",
+      searchPets: search,
+    });
+
+    window.scrollTo({ top: 430 });
+    setSearch("");
+    setModalSearch(false);
+  };
+
   return (
     <div className="animalX--filter">
+      {modalSearch ? (
+        <div className="animalX--modal">
+          <div ref={modalRef} className="animalX--modal-search">
+            <form onSubmit={(e) => searchSubmit(e)}>
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                type="text"
+                placeholder="Pesquisar pets..."
+              />
+
+              <button type="submit">
+                <Search />
+              </button>
+            </form>
+          </div>
+        </div>
+      ) : (
+        ""
+      )}
+
       <div className="animalX--filter__categorys">
         {categorys.map((category, i) => (
           <button
@@ -31,6 +92,14 @@ function FilterHeader() {
               dispatch({
                 type: "SET_ACTIVE_CATEGORY",
                 activeCategory: category,
+              });
+              dispatchSearch({
+                type: "SET_SEARCH_PETS",
+                searchPets: "",
+              });
+              dispatch({
+                type: "SET_FILTER",
+                filter: "",
               });
             }}
           >
@@ -60,11 +129,14 @@ function FilterHeader() {
           <ButtonFilter
             name={"Localização"}
             borderRight={"1px solid rgba(0, 0, 0, 0)"}
-            items={["Ceará, Brasil", "São Paulo, Brasil"]}
+            items={["Fortaleza CE", "Pacajus CE"]}
           />
         </div>
 
-        <div className="animalX--filter__types-search">
+        <div
+          onClick={() => setModalSearch(true)}
+          className="animalX--filter__types-search"
+        >
           <Search />
 
           <p>Me encontre</p>

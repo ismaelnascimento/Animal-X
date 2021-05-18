@@ -13,7 +13,12 @@ import Cachorro from "../../assets/images/animals/cachorro.svg";
 //
 import FilterHeader from "../../components/Filter/FilterHeader";
 
+//
+import { useHistory } from "react-router-dom";
+
 function Header() {
+  const history = useHistory();
+
   return (
     <div className="animalX--header">
       <div className="animalX--header__pata">
@@ -25,7 +30,11 @@ function Header() {
 
         <div className="animalX--header__left-pets">
           <img src={Gato} alt={"Gato"} />
-          <img className="animalX--header__left-pets-cachorro" src={Cachorro} alt={"Cachorro"} />
+          <img
+            className="animalX--header__left-pets-cachorro"
+            src={Cachorro}
+            alt={"Cachorro"}
+          />
         </div>
 
         <FilterHeader />
@@ -33,8 +42,16 @@ function Header() {
 
       <div className="animalX--header__right">
         <div className="animalX--header__right-btns">
-          <button className="animalX--header__right-btns-entrar">Entrar</button>
-          <button className="animalX--header__right-btns-cadastro">
+          <button
+            onClick={() => history.push("/entrar")}
+            className="animalX--header__right-btns-entrar"
+          >
+            Entrar
+          </button>
+          <button
+            onClick={() => history.push("/cadastro")}
+            className="animalX--header__right-btns-cadastro"
+          >
             Cadastro
           </button>
         </div>

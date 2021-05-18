@@ -3,8 +3,12 @@ import React, { useState } from "react";
 //
 import Arrow from "../../assets/icons/Arrow";
 
+//
+import { useStateValue } from "../../providers/StateProvider";
+
 function ButtonFilter(props) {
   const [arrow, setArrow] = useState(false);
+  const [{}, dispatch] = useStateValue();
 
   return !arrow ? (
     <div
@@ -34,7 +38,20 @@ function ButtonFilter(props) {
         className="animalX--buttonFilter-active"
       >
         {props.items.map((item, i) => (
-          <p key={i}>{item}</p>
+          <p
+            onClick={() => {
+              dispatch({
+                type: "SET_FILTER",
+                filter: {
+                  state: item,
+                  type: props.name,
+                },
+              });
+            }}
+            key={i}
+          >
+            {item}
+          </p>
         ))}
       </div>
     </div>

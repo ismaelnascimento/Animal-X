@@ -123,3 +123,26 @@
   position: absolute;
   bottom: -32px;
 }
+
+.animalX--notPets {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px auto;
+}
+
+.animalX--notPets > svg {
+  width: 110px;
+  height: 110px;
+}
+
+.animalX--notPets > svg path {
+  fill: #fcce7f;
+}
+
+.animalX--notPets > p {
+  font-size: 21px;
+  font-weight: 500;
+  color: rgb(44, 44, 58);
+  margin-top: 25px;
+}
