@@ -71,35 +71,36 @@ function Content() {
   }, [activeCategory, getPets, searchPets, filter]);
 
   return (
-    <div className="animalX--content">
-      {filterPets?.length !== 0 ? (
-        filterPets?.map((pet, i) => (
-          <CardPet
-            key={i}
-            id={pet.id}
-            image={pet.image}
-            apelido={pet.apelido}
-            cidade={pet.cidade}
-            idade={pet.idade}
-            estado={pet.estado}
-            descricao={pet.descricao}
-            whatsapp={pet.whatsapp}
-            tamanho={pet.tamanho}
-            sexo={pet.sexo}
-            categoria={pet.categoria}
-            raca={pet.raca}
-            situacao={pet.situacao}
-            especie={pet.especie}
-            peso={pet.peso}
-          />
-        ))
-      ) : (
-        <div className="animalX--notPets">
-          <More />
-          <p>Não ha pets aqui</p>
-        </div>
-      )}
-
+    <div style={{ position: "relative" }}>
+      <div className="animalX--content">
+        {filterPets?.length !== 0 ? (
+          filterPets?.map((pet, i) => (
+            <CardPet
+              key={i}
+              id={pet.id}
+              image={pet.image}
+              apelido={pet.apelido}
+              cidade={pet.cidade}
+              idade={pet.idade}
+              estado={pet.estado}
+              descricao={pet.descricao}
+              whatsapp={pet.whatsapp}
+              tamanho={pet.tamanho}
+              sexo={pet.sexo}
+              categoria={pet.categoria}
+              raca={pet.raca}
+              situacao={pet.situacao}
+              especie={pet.especie}
+              peso={pet.peso}
+            />
+          ))
+        ) : (
+          <div className="animalX--notPets">
+            <More />
+            <p>Não ha pets aqui</p>
+          </div>
+        )}
+      </div>
       <img
         className="animalX--content__pata"
         src={Pata}

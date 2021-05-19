@@ -146,3 +146,26 @@
   color: rgb(44, 44, 58);
   margin-top: 25px;
 }
+
+/* RESPONSIVE */
+
+@media (max-width: 400px) {
+  .animalX--content {
+    justify-content: flex-start;
+    padding: 60px 30px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+  .animalX--card__pet {
+    margin: 30px 22px;
+    width: 260px;
+    height: 385px;
+    background: #ffffff;
+  }
+  .animalX--card__pet-image {
+    height: 195px;
+  }
+  .animalX--card__pet-image > img {
+    border-radius: 22px 22px 15px 15px;
+  }
+}

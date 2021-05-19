@@ -52,7 +52,7 @@ function FilterHeader() {
       searchPets: search,
     });
 
-    window.scrollTo({ top: 430 });
+    window.scrollTo({ top: 405 });
     setSearch("");
     setModalSearch(false);
   };
