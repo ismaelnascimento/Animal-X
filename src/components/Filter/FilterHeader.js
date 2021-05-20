@@ -42,6 +42,7 @@ function FilterHeader() {
 
   const [categorys, setCategorys] = useState([
     "Gatos",
+    "Gato",
     "Cachorros",
     "Outros Pets",
   ]);

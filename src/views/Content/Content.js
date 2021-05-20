@@ -8,7 +8,7 @@ import CardPet from "../../components/Cards/CardPet";
 
 //
 import { useStateValue } from "../../providers/StateProvider";
-
+import api from "../../../src/service/service";
 const More = () => (
   <svg
     width="24"
@@ -37,33 +37,39 @@ function Content() {
   const [{ searchPets }, dispatchSearch] = useStateValue();
   const [getPets, setGetPets] = useState();
   const [{ filter }] = useStateValue();
+  
+  async function data (){
+    const resp = await api.get("animal/animaisAdocao");
+    console.log(resp.data.content);
+    setGetPets(resp.data.content); 
+  }
 
-  useEffect(() => {
-    setGetPets(pets);
-  }, [pets]);
 
-  const filterPets = useMemo(() => {
+  useEffect(()=>{
+    data();
+  })
+    const filterPets = useMemo(() => {
     if (searchPets === "" && filter === "") {
-      return pets?.filter((pet) => {
+      return getPets?.filter((pet) => {
         return pet?.categoria === activeCategory;
       });
     } else if (searchPets !== "") {
-      return pets?.filter((pet) => {
+      return getPets?.filter((pet) => {
         return pet?.apelido?.toLowerCase()?.includes(searchPets?.toLowerCase());
       });
     } else if (filter !== "") {
       if (filter?.type === "Raça") {
-        return pets?.filter((pet) => {
+        return getPets?.filter((pet) => {
           return pet?.raca === filter?.state;
         });
       } else if (filter?.type === "Localização") {
-        return pets?.filter((pet) => {
-          var local = `${pet.cidade} ${pet.estado}`;
+        return getPets?.filter((pet) => {
+          var local = `${pet.usuario.cidade} ${pet.usuario.estado}`;
 
           return local?.toLowerCase().includes(filter?.state?.toLowerCase());
         });
       } else {
-        return pets?.filter((pet) => {
+        return getPets?.filter((pet) => {
           return pet?.idade === filter?.state;
         });
       }
@@ -78,13 +84,13 @@ function Content() {
             <CardPet
               key={i}
               id={pet.id}
-              image={pet.image}
+              image={pet.fotos.length == 0 ? null:`https://photoanimalx.s3.us-east-2.amazonaws.com/${pet.fotos[0].nome}` }
               apelido={pet.apelido}
-              cidade={pet.cidade}
+              cidade={pet.usuario.cidade}
               idade={pet.idade}
-              estado={pet.estado}
+              estado={pet.usuario.estado}
               descricao={pet.descricao}
-              whatsapp={pet.whatsapp}
+              whatsapp={pet.usuario.whatsapp}
               tamanho={pet.tamanho}
               sexo={pet.sexo}
               categoria={pet.categoria}
