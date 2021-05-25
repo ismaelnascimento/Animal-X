@@ -42,7 +42,6 @@ function FilterHeader() {
 
   const [categorys, setCategorys] = useState([
     "Gatos",
-    "Gato",
     "Cachorros",
     "Outros Pets",
   ]);
@@ -130,7 +129,7 @@ function FilterHeader() {
           <ButtonFilter
             name={"Localização"}
             borderRight={"1px solid rgba(0, 0, 0, 0)"}
-            items={["Fortaleza CE", "Pacajus CE"]}
+            items={["Fortaleza CE", "Pacajus CE", "Horizonte CE"]}
           />
         </div>
 

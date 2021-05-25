@@ -44,6 +44,7 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
+  border-radius: 22px 22px 15px 15px;
 }
 
 .animalX--card__pet-content {
@@ -164,8 +165,5 @@
   }
   .animalX--card__pet-image {
     height: 195px;
-  }
-  .animalX--card__pet-image > img {
-    border-radius: 22px 22px 15px 15px;
   }
 }

@@ -8,7 +8,8 @@ import CardPet from "../../components/Cards/CardPet";
 
 //
 import { useStateValue } from "../../providers/StateProvider";
-import api from "../../../src/service/service";
+import api from "../../service/service";
+
 const More = () => (
   <svg
     width="24"
@@ -37,18 +38,17 @@ function Content() {
   const [{ searchPets }, dispatchSearch] = useStateValue();
   const [getPets, setGetPets] = useState();
   const [{ filter }] = useStateValue();
-  
-  async function data (){
+
+  async function data() {
     const resp = await api.get("animal/animaisAdocao");
-    console.log(resp.data.content);
-    setGetPets(resp.data.content); 
+    setGetPets(resp.data.content);
   }
 
-
-  useEffect(()=>{
+  useEffect(() => {
     data();
-  })
-    const filterPets = useMemo(() => {
+  });
+
+  const filterPets = useMemo(() => {
     if (searchPets === "" && filter === "") {
       return getPets?.filter((pet) => {
         return pet?.categoria === activeCategory;
@@ -79,12 +79,16 @@ function Content() {
   return (
     <div style={{ position: "relative" }}>
       <div className="animalX--content">
-        {filterPets?.length !== 0 ? (
+        {filterPets?.length > 0 ? (
           filterPets?.map((pet, i) => (
             <CardPet
               key={i}
               id={pet.id}
-              image={pet.fotos.length == 0 ? null:`https://photoanimalx.s3.us-east-2.amazonaws.com/${pet.fotos[0].nome}` }
+              image={
+                pet.fotos.length == 0
+                  ? null
+                  : `https://photoanimalx.s3.us-east-2.amazonaws.com/${pet.fotos[0].nome}`
+              }
               apelido={pet.apelido}
               cidade={pet.usuario.cidade}
               idade={pet.idade}
@@ -103,7 +107,7 @@ function Content() {
         ) : (
           <div className="animalX--notPets">
             <More />
-            <p>Não ha pets aqui</p>
+            <p>Nenhum pet encontrado.</p>
           </div>
         )}
       </div>

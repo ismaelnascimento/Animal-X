@@ -1,0 +1,269 @@
+.animalX--login,
+.animalX--login > svg {
+  z-index: 999;
+  position: fixed;
+}
+
+.animalX--login > svg {
+  width: 60px;
+  height: 60px;
+  top: 12px;
+  left: 20px;
+  cursor: pointer;
+}
+
+.animalX--login > svg path {
+  fill: #130f26;
+}
+
+.animalX--login {
+  background: #ffe9c2;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  overflow: auto;
+}
+
+.animalX--login-left {
+  position: relative;
+  border-radius: 0 25px 25px 0;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.animalX--login-left__pata {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.animalX--login-left__logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.animalX--login-btns {
+  position: absolute;
+  bottom: 30px;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  background: #fde0ad;
+  border: 2px solid #ef9a13;
+  width: 81%;
+  height: 57px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.animalX--login-active-btn {
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  font-size: 16px;
+  height: 100%;
+  cursor: pointer;
+  font-weight: 500;
+  margin: 0 6px;
+  background: linear-gradient(
+      90deg,
+      rgba(239, 154, 19, 0.23) 38%,
+      rgba(255, 255, 255, 0.71) 100%
+    ),
+    #ef9a13;
+  transition: all 0.3s ease;
+  color: #fff;
+}
+
+.animalX--login-desactive-btn {
+  color: #ef9a13;
+  background-color: hsla(0, 0%, 100%, 0);
+  width: 100%;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  font-size: 16px;
+  height: 100%;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0 6px;
+}
+
+/* RIGHT */
+
+.animalX--login-right {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 10% 0;
+  align-items: center;
+  background: #99d4ff;
+  position: relative;
+}
+
+.animalX--login-right__pata-top {
+  position: absolute;
+  top: 0;
+  left: -20px;
+}
+
+.animalX--login-right__pata-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0px;
+}
+
+.animalX--login-right > p {
+  font-size: 37px;
+  color: #fff;
+  font-weight: 500;
+  text-align: center;
+  margin: 0px 10px 20px;
+  z-index: 1;
+}
+
+.animalX--login-right > h5 {
+  font-size: 15px;
+  color: #ffffff;
+  font-weight: 500;
+  z-index: 1;
+  text-align: center;
+}
+
+.animalX--login-right > h5 strong {
+  color: #475057;
+}
+
+.animalX--login-right > button {
+  margin-top: 30px;
+  width: 280px;
+  border: none;
+  outline: none;
+  border-radius: 30px;
+  font-size: 18px;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
+  cursor: pointer;
+  font-weight: 500;
+  background: linear-gradient(
+      90deg,
+      rgba(239, 154, 19, 0.23) 38%,
+      rgba(255, 255, 255, 0.71) 100%
+    ),
+    #ef9a13;
+  transition: all 0.3s ease;
+  color: #fff;
+  z-index: 1;
+}
+
+.animalX--login__form > button:hover {
+  opacity: 0.8;
+}
+
+.animalX--login__input-form {
+  width: 80%;
+  margin: 15px 0;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+
+.animalX--login__input-form > p {
+  font-size: 16px;
+  color: rgb(43, 52, 65);
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.animalX--login__input-form > div {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background-color: hsla(0, 0%, 100%, 0);
+  height: 50px;
+  border: 2px solid #fff;
+  border-radius: 20px;
+}
+
+.animalX--login__input-form > div > svg {
+  margin: 0 12px;
+  width: 25px;
+  height: 25px;
+  max-width: 25px;
+  max-height: 25px;
+  min-height: 25px;
+  min-width: 25px;
+}
+
+.animalX--login__input-form > div > svg path {
+  fill: #fff;
+}
+
+.animalX--login__input-form > div > input {
+  width: 100%;
+  height: 35px;
+  font-size: 15.5px;
+  background-color: #00000000;
+  border: none;
+  outline: none;
+  color: #ffff;
+}
+
+/* UPLOAD */
+
+.animalX--login__upload {
+  width: 115px;
+  height: 115px;
+  max-height: 115px;
+  min-height: 115px;
+  background: rgba(194, 235, 255, 0.7);
+  border-radius: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.animalX--login__upload > img {
+  width: 100%;
+  height: 100%;
+  cursor: auto;
+  border-radius: 25px;
+  object-fit: cover;
+}
+
+.animalX--login__upload:hover {
+  background: rgba(194, 235, 255, 0.829);
+}
+
+.animalX--login__upload > svg {
+  width: 60px;
+  height: 60px;
+}
+
+/* Responsive */
+
+@media (max-width: 650px) {
+  .animalX--login {
+    flex-direction: column;
+  }
+  .animalX--login-left__logo {
+    height: 300px;
+  }
+}
