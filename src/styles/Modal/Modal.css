@@ -135,3 +135,72 @@
   width: 27px;
   height: 27px;
 }
+
+/***/
+
+.animalX--modal-user {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  width: 290px;
+  height: auto;
+  border-radius: 22px;
+  position: absolute;
+  padding: 8px;
+  top: 12px;
+  transition: all 0.3s ease;
+  right: 12px;
+}
+
+.animalX--modal-user__infos {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 12px;
+  padding-bottom: 10px;
+}
+
+.animalX--modal-user__infos > img {
+  width: 92px;
+  height: 92px;
+  border-radius: 100%;
+}
+
+.animalX--modal-user__infos > p {
+  margin-top: 7px;
+  font-size: 16.5px;
+  font-weight: 600;
+  color: #393e49;
+  text-align: center;
+}
+
+.animalX--modal-user__infos > h5 {
+  font-size: 13px;
+  font-weight: 400;
+  color: #8c8f99;
+  text-align: center;
+}
+
+.animalX--modal-user__opt {
+  padding: 14px 15px;
+  font-size: 16.5px;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 15px;
+  color: #31333a;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.animalX--modal-user__opt > svg {
+  margin-right: 12px;
+}
+
+.animalX--modal-user__opt > svg path {
+  fill: rgb(108, 110, 119);
+}
+
+.animalX--modal-user__opt:hover {
+  background-color: #f6f7fa;
+}

@@ -38,10 +38,17 @@ function Content() {
   const [{ searchPets }, dispatchSearch] = useStateValue();
   const [getPets, setGetPets] = useState();
   const [{ filter }] = useStateValue();
+  const [notPets, setNotPets] = useState(false);
 
   async function data() {
     const resp = await api.get("animal/animaisAdocao");
-    setGetPets(resp.data.content);
+    if (resp.data.content?.length !== 0) {
+      setNotPets(false);
+      setGetPets(resp.data.content);
+    } else {
+      setNotPets(true);
+      setGetPets([]);
+    }
   }
 
   useEffect(() => {
@@ -104,11 +111,13 @@ function Content() {
               peso={pet.peso}
             />
           ))
-        ) : (
+        ) : notPets ? (
           <div className="animalX--notPets">
             <More />
             <p>Nenhum pet encontrado.</p>
           </div>
+        ) : (
+          <div className="lds-ellipsis"></div>
         )}
       </div>
       <img

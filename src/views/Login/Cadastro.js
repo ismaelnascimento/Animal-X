@@ -11,8 +11,15 @@ import { useHistory } from "react-router-dom";
 //
 import { CgClose } from "react-icons/cg";
 
+//
+import { useStateValue } from "../../providers/StateProvider";
+
+//
+import UserNull from "../../assets/images/user/usernull.png";
+
 function Cadastro() {
   const history = useHistory();
+  const [{}, dispatch] = useStateValue();
 
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
@@ -20,31 +27,68 @@ function Cadastro() {
   const [upload, setUpload] = useState(null);
   const [uploadView, setUploadView] = useState("");
   const [viewSenha, setViewSenha] = useState(false);
+  const [whatsapp, setWhatsapp] = useState("");
 
   const cadastro = (e) => {
     e.preventDefault();
 
-    // handleCadastro
+    fetch(
+      "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        var user = {
+          img_file: upload ? upload : null,
+          img_view: upload ? uploadView : UserNull,
+          cidade: data?.city,
+          email: email,
+          estado: data?.state,
+          id: 1,
+          nome: name,
+          senha: senha,
+          whatsapp: whatsapp,
+        };
+
+        // handleCadastro
+        dispatch({
+          type: "SET_USER",
+          user: user,
+        });
+
+        history.push("/");
+        setSenha("");
+        setEmail("");
+        setName("");
+        setWhatsapp("");
+      });
   };
 
   const handleName = (e) => {
     if (name !== "") {
       if (e.key === "Enter") {
-        document.getElementById("cadastro-email").focus();
+        document.getElementById("cadastro-whatsapp").focus();
       }
     }
   };
 
   const handleEmail = (e) => {
-    if (email !== "" && name !== "") {
+    if (whatsapp !== "" && email !== "" && name !== "") {
       if (e.key === "Enter") {
         document.getElementById("cadastro-senha").focus();
       }
     }
   };
 
+  const handleWhatsapp = (e) => {
+    if (whatsapp !== "" && name !== "") {
+      if (e.key === "Enter") {
+        document.getElementById("cadastro-email").focus();
+      }
+    }
+  };
+
   const handleSenha = (e) => {
-    if (email !== "" && senha !== "" && name !== "") {
+    if (email !== "" && whatsapp !== "" && senha !== "" && name !== "") {
       if (e.key === "Enter") {
         cadastro(e);
       }
@@ -174,6 +218,22 @@ function Cadastro() {
         </div>
 
         <div className="animalX--login__input-form">
+          <p>Whatsapp</p>
+          <div>
+            <IconWhatsapp />
+            <input
+              style={{ marginRight: "12px" }}
+              id="cadastro-whatsapp"
+              placeholder="Seu whatsapp"
+              type="text"
+              value={whatsapp}
+              onKeyUp={(e) => handleWhatsapp(e)}
+              onChange={(e) => setWhatsapp(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="animalX--login__input-form">
           <p>E-mail</p>
           <div>
             <IconEmail />
@@ -204,9 +264,15 @@ function Cadastro() {
               onChange={(e) => setSenha(e.target.value)}
             />
             {viewSenha ? (
-              <IconOlhoClose onClick={() => setViewSenha(false)} />
+              <IconOlhoClose
+                style={{ zIndex: 999, cursor: "pointer" }}
+                onClick={() => setViewSenha(false)}
+              />
             ) : (
-              <IconOlhoOpen onClick={() => setViewSenha(true)} />
+              <IconOlhoOpen
+                style={{ zIndex: 999, cursor: "pointer" }}
+                onClick={() => setViewSenha(true)}
+              />
             )}
           </div>
         </div>
@@ -220,6 +286,23 @@ function Cadastro() {
 }
 
 export default Cadastro;
+
+const IconWhatsapp = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M11.5317 12.4724C15.5208 16.4604 16.4258 11.8467 18.9656 14.3848C21.4143 16.8328 22.8216 17.3232 19.7192 20.4247C19.3306 20.737 16.8616 24.4943 8.1846 15.8197C-0.493478 7.144 3.26158 4.67244 3.57397 4.28395C6.68387 1.17385 7.16586 2.58938 9.61449 5.03733C12.1544 7.5765 7.54266 8.48441 11.5317 12.4724Z"
+      fill="#130F26"
+    />
+  </svg>
+);
 
 const IconImage = () => (
   <svg

@@ -12,34 +12,24 @@ function Entrar() {
   const history = useHistory();
 
   const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [viewSenha, setViewSenha] = useState(false);
 
-  const entrar = (e) => {
+  const recuperarSenha = (e) => {
     e.preventDefault();
 
-    // handleEntrar
+    // handle RecuperarSenha
   };
 
   const handleEmail = (e) => {
     if (email !== "") {
       if (e.key === "Enter") {
-        document.getElementById("entrar-senha").focus();
-      }
-    }
-  };
-
-  const handleSenha = (e) => {
-    if (email !== "" && senha !== "") {
-      if (e.key === "Enter") {
-        entrar(e);
+        recuperarSenha(e);
       }
     }
   };
 
   return (
     <div className="animalX--login">
-      <IconBack onClick={() => history.push("/")} />
+      <IconBack onClick={() => history.push("/entrar")} />
 
       <div className="animalX--login-left">
         <img className="animalX--login-left__pata" src={Pata} alt="" />
@@ -48,7 +38,7 @@ function Entrar() {
         <section className="animalX--login-btns">
           <button
             onClick={() => history.push("/entrar")}
-            className="animalX--login-active-btn"
+            className="animalX--login-desactive-btn"
           >
             Entrar
           </button>
@@ -65,10 +55,7 @@ function Entrar() {
         <PataAzulTop className="animalX--login-right__pata-top" />
         <PataAzulBottom className="animalX--login-right__pata-bottom" />
 
-        <h5>
-          Bem vindo(a) ao <strong>Animal X</strong>
-        </h5>
-        <p>Entrar Agora</p>
+        <p>Recuperar senha</p>
 
         <div className="animalX--login__input-form">
           <p>E-mail</p>
@@ -76,9 +63,8 @@ function Entrar() {
             <IconEmail />
             <input
               style={{ marginRight: "12px" }}
-              id="entrar-email"
               autoComplete="new-password"
-              placeholder="Escreva seu e-mail"
+              placeholder="Escreva seu email de recuperação"
               type="text"
               value={email}
               onKeyUp={(e) => handleEmail(e)}
@@ -87,41 +73,7 @@ function Entrar() {
           </div>
         </div>
 
-        <div className="animalX--login__input-form">
-          <p>Senha</p>
-          <div>
-            <IconSenha />
-            <input
-              id="entrar-senha"
-              autoComplete="new-password"
-              placeholder="Escreva seu senha"
-              type={viewSenha ? "text" : "password"}
-              value={senha}
-              onKeyUp={(e) => handleSenha(e)}
-              onChange={(e) => setSenha(e.target.value)}
-            />
-            {viewSenha ? (
-              <IconOlhoClose
-                style={{ zIndex: 999, cursor: "pointer" }}
-                onClick={() => setViewSenha(false)}
-              />
-            ) : (
-              <IconOlhoOpen
-                style={{ zIndex: 999, cursor: "pointer" }}
-                onClick={() => setViewSenha(true)}
-              />
-            )}
-          </div>
-        </div>
-
-        <a
-          href="/recuperar-senha"
-          onClick={() => history.push("/recuperar-senha")}
-        >
-          Recuperar senha
-        </a>
-
-        <button onClick={(e) => entrar(e)}>Entrar</button>
+        <button onClick={(e) => recuperarSenha(e)}>Concluir</button>
       </div>
     </div>
   );
@@ -203,54 +155,6 @@ const PataAzulBottom = ({ ...res }) => (
   </svg>
 );
 
-const IconOlhoClose = ({ ...res }) => (
-  <svg
-    {...res}
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      opacity="0.4"
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M11.9902 3.88189H12C13.3951 3.88189 14.7512 4.21662 16 4.84572L12.7415 8.13497C12.5073 8.09559 12.2537 8.06605 12 8.06605C9.8439 8.06605 8.09756 9.82832 8.09756 12.0041C8.09756 12.2601 8.12683 12.516 8.16585 12.7523L4.5561 16.395C3.58049 15.253 2.73171 13.8737 2.05854 12.2896C1.98049 12.1124 1.98049 11.8958 2.05854 11.7087C4.14634 6.80588 7.86341 3.88189 11.9902 3.88189ZM18.4293 6.54991C19.8439 7.84946 21.0439 9.60188 21.9415 11.7087C22.0195 11.8958 22.0195 12.1124 21.9415 12.2896C19.8537 17.1924 16.1366 20.1263 12 20.1263H11.9902C10.1073 20.1263 8.30244 19.506 6.71219 18.3739L9.80488 15.253C10.4293 15.6753 11.1902 15.9323 12 15.9323C14.1463 15.9323 15.8927 14.17 15.8927 12.0041C15.8927 11.1869 15.639 10.419 15.2195 9.78894L18.4293 6.54991Z"
-      fill="#130F26"
-    ></path>
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M18.4293 6.54952L20.205 4.75771C20.4976 4.4722 20.4976 3.99964 20.205 3.71413C19.922 3.42862 19.4635 3.42862 19.1708 3.71413L18.2537 4.63957C18.244 4.65926 18.2245 4.67895 18.205 4.69864C18.1952 4.71833 18.1757 4.73802 18.1562 4.75771L17.2879 5.63491L14.1952 8.7558L3.72691 19.3186L3.69764 19.358C3.50252 19.6435 3.54154 20.0383 3.78545 20.2844C3.92203 20.4311 4.11715 20.5 4.30252 20.5C4.48789 20.5 4.67325 20.4311 4.81959 20.2844L15.2196 9.78855L18.4293 6.54952ZM12.0002 14.4555C13.3368 14.4555 14.4294 13.3529 14.4294 12.0041C14.4294 11.5906 14.3319 11.1968 14.1563 10.8621L10.8685 14.1798C11.2002 14.3571 11.5904 14.4555 12.0002 14.4555Z"
-      fill="#130F26"
-    ></path>
-  </svg>
-);
-
-const IconOlhoOpen = ({ ...res }) => (
-  <svg
-    {...res}
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      opacity="0.4"
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M17.7366 6.04606C19.4439 7.36388 20.8976 9.29455 21.9415 11.7091C22.0195 11.8924 22.0195 12.1067 21.9415 12.2812C19.8537 17.1103 16.1366 20 12 20H11.9902C7.86341 20 4.14634 17.1103 2.05854 12.2812C1.98049 12.1067 1.98049 11.8924 2.05854 11.7091C4.14634 6.87903 7.86341 4 11.9902 4H12C14.0683 4 16.0293 4.71758 17.7366 6.04606ZM8.09756 12C8.09756 14.1333 9.8439 15.8691 12 15.8691C14.1463 15.8691 15.8927 14.1333 15.8927 12C15.8927 9.85697 14.1463 8.12121 12 8.12121C9.8439 8.12121 8.09756 9.85697 8.09756 12Z"
-      fill="#130F26"
-    ></path>
-    <path
-      d="M14.431 11.9969C14.431 13.3254 13.3384 14.4114 12.0018 14.4114C10.6554 14.4114 9.56274 13.3254 9.56274 11.9969C9.56274 11.832 9.58226 11.6779 9.61152 11.5227H9.66031C10.7432 11.5227 11.6213 10.6694 11.6603 9.60175C11.7676 9.58332 11.8847 9.57265 12.0018 9.57265C13.3384 9.57265 14.431 10.6587 14.431 11.9969Z"
-      fill="#130F26"
-    ></path>
-  </svg>
-);
-
 const IconEmail = () => (
   <svg
     width="24"
@@ -266,28 +170,6 @@ const IconEmail = () => (
     ></path>
     <path
       d="M21.4761 5.6736C20.6101 4.0416 18.9061 2.9996 17.0301 2.9996H7.05013C5.17413 2.9996 3.47013 4.0416 2.60413 5.6736C2.41013 6.0386 2.50213 6.4936 2.82513 6.7516L10.2501 12.6906C10.7701 13.1106 11.4001 13.3196 12.0301 13.3196C12.0341 13.3196 12.0371 13.3196 12.0401 13.3196C12.0431 13.3196 12.0471 13.3196 12.0501 13.3196C12.6801 13.3196 13.3101 13.1106 13.8301 12.6906L21.2551 6.7516C21.5781 6.4936 21.6701 6.0386 21.4761 5.6736Z"
-      fill="#130F26"
-    ></path>
-  </svg>
-);
-
-const IconSenha = () => (
-  <svg
-    width="24"
-    height="24"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      fill-rule="evenodd"
-      clip-rule="evenodd"
-      d="M7.7688 8.71384H16.2312C18.5886 8.71384 20.5 10.583 20.5 12.8885V17.8253C20.5 20.1308 18.5886 22 16.2312 22H7.7688C5.41136 22 3.5 20.1308 3.5 17.8253V12.8885C3.5 10.583 5.41136 8.71384 7.7688 8.71384ZM11.9949 17.3295C12.4928 17.3295 12.8891 16.9419 12.8891 16.455V14.2489C12.8891 13.7719 12.4928 13.3844 11.9949 13.3844C11.5072 13.3844 11.1109 13.7719 11.1109 14.2489V16.455C11.1109 16.9419 11.5072 17.3295 11.9949 17.3295Z"
-      fill="#130F26"
-    ></path>
-    <path
-      opacity="0.4"
-      d="M17.5228 7.39595V8.86667C17.1672 8.7673 16.7912 8.71761 16.4051 8.71761H15.7446V7.39595C15.7446 5.37868 14.068 3.73903 12.0052 3.73903C9.94245 3.73903 8.26582 5.36874 8.25566 7.37608V8.71761H7.60533C7.20904 8.71761 6.83307 8.7673 6.47742 8.87661V7.39595C6.48758 4.41476 8.9568 2 11.9849 2C15.0536 2 17.5228 4.41476 17.5228 7.39595Z"
       fill="#130F26"
     ></path>
   </svg>

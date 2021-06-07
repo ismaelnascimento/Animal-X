@@ -1,0 +1,28 @@
+/* LOADING */
+
+.lds-ellipsis {
+  width: 85px;
+  height: 85px;
+  border-radius: 50%;
+  border: 0.3rem solid #99d4ff;
+  border-top-color: #fff;
+  animation: 1s loading infinite linear;
+  transition: all 0.3s ease;
+  margin-top: 35px;
+  margin-bottom: 95px;
+}
+
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(80deg);
+  }
+  50% {
+    transform: rotate(300deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

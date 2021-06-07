@@ -2,7 +2,7 @@
   background-color: #ffe9c2;
   width: 100%;
   display: flex;
-  height: 420px;
+  height: 407px;
   z-index: 1;
   padding: 20px;
   justify-content: space-between;
@@ -37,8 +37,16 @@
   right: -25px;
 }
 
+.animalX--header__left-pets-cachorro {
+  width: 240px;
+  z-index: -1;
+  position: relative;
+  right: 140px;
+  height: auto;
+}
+
 .animalX--header__left > img {
-  width: 330px;
+  width: 280px;
   margin: 20px auto;
 }
 
@@ -54,7 +62,7 @@
   width: 90%;
   position: relative;
   margin-left: auto;
-  bottom: -43px;
+  bottom: -10px;
 }
 
 .animalX--header__right-btns {
@@ -101,6 +109,68 @@
   border: none;
   background: #424960;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.animalX--header__right-user {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 30px;
+  padding-right: 7px;
+  background-color: #fddea7;
+  transition: all 0.3s ease;
+}
+
+.animalX--header__right-user:hover {
+  opacity: 0.7;
+}
+
+.animalX--header__right-user > img {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+.animalX--header__right-user > svg {
+  width: 25px;
+  height: 25px;
+  margin-left: 3px;
+}
+
+.animalX--header__right-user > svg path {
+  fill: #fff;
+}
+
+/**/
+
+.animalX--header__right-add {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  border-radius: 100%;
+  cursor: pointer;
+  background-color: #ffce7a;
+  border: none;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.animalX--header__right-add:hover {
+  background-color: #fcd085;
+  transform: rotate(180deg);
+}
+
+.animalX--header__right-add > svg {
+  width: 40px;
+  height: 40px;
+}
+
+.animalX--header__right-add > svg path {
+  stroke: #fff;
 }
 
 /* RESPONSIVE */

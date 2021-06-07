@@ -9,6 +9,7 @@ import Cachorro3 from "../assets/pets/cachorro3.svg";
 import Cachorro4 from "../assets/pets/cachorro4.svg";
 
 export const initialState = {
+  user: null,
   activeCategory: "Gatos",
   searchPets: "",
   filter: "",
@@ -158,10 +159,16 @@ export const actionTypes = {
   SET_PETS: "SET_PETS",
   SET_SEARCH_PETS: "SET_SEARCH_PETS",
   SET_FILTER: "SET_FILTER",
+  SET_USER: "SET_USER",
 };
 
 const reducer = (state, action) => {
   switch (action.type) {
+    case actionTypes.SET_USER:
+      return {
+        ...state,
+        user: action.user,
+      };
     case actionTypes.SET_PETS:
       return {
         ...state,

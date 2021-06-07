@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useHistory } from "react-router-dom";
 
 //
 import Arrow from "../../assets/icons/Arrow";
@@ -7,6 +8,7 @@ import Arrow from "../../assets/icons/Arrow";
 import { useStateValue } from "../../providers/StateProvider";
 
 function ButtonFilter(props) {
+  const history = useHistory();
   const [arrow, setArrow] = useState(false);
   const [{}, dispatch] = useStateValue();
 
@@ -47,6 +49,7 @@ function ButtonFilter(props) {
                   type: props.name,
                 },
               });
+              history.push("/");
             }}
             key={i}
           >

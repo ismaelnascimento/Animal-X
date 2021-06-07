@@ -8,6 +8,7 @@ import { useStateValue } from "../../providers/StateProvider";
 //
 import ButtonFilter from "../Buttons/ButtonFilter";
 import Search from "../../assets/icons/Search";
+import { useHistory } from "react-router-dom";
 
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
@@ -31,6 +32,8 @@ function useOnClickOutside(ref, handler) {
 }
 
 function FilterHeader() {
+  const history = useHistory();
+
   const [{ activeCategory }, dispatch] = useStateValue();
   const [{}, dispatchSearch] = useStateValue();
   const [modalSearch, setModalSearch] = useState(false);
@@ -101,6 +104,7 @@ function FilterHeader() {
                 type: "SET_FILTER",
                 filter: "",
               });
+              history.push("/");
             }}
           >
             {category}

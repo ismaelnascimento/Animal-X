@@ -1,0 +1,117 @@
+.app-cadastro-pet {
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+}
+
+.app-cadastro-pet__back {
+  position: absolute;
+  background-color: #99d4ff;
+  width: 100%;
+  height: 350px;
+}
+
+.app-cadastro-pet__back > div {
+  width: 100%;
+  height: 100px;
+  position: absolute;
+  top: 0;
+  background-color: #b4bacb;
+}
+
+.app-cadastro-pet__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: auto;
+  background-color: #fafafc;
+  width: 85%;
+  margin-top: 80px;
+  z-index: 1;
+  margin-bottom: 40px;
+  border-radius: 20px;
+  padding: 30px;
+  padding-top: 55px;
+  position: relative;
+}
+
+.app-cadastro-pet__content > p {
+  font-size: 29px;
+  position: absolute;
+  top: -20px;
+  color: #3f5cb1;
+  font-weight: 600;
+  background-color: #fafafc;
+  padding: 12px 35px;
+  border-radius: 30px;
+}
+
+.app-cadastro-pet__content-items__uploads {
+  display: flex;
+  align-items: center;
+}
+
+.app-cadastro-pet__content-items__uploads > input {
+  display: none;
+}
+
+.app-cadastro-pet__content-items__uploads-view {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  border: 2px dashed #dbdde0;
+  width: 268px;
+  height: 219px;
+  cursor: pointer;
+  border-radius: 22px;
+  margin: 15px;
+  position: relative;
+}
+
+.app-cadastro-pet__content-items__uploads-view > svg {
+  width: 60px;
+  height: 60px;
+}
+
+.app-cadastro-pet__content-items__uploads-view > svg path {
+  fill: #8c8d92;
+}
+
+.app-cadastro-pet__content-items__uploads-view > p {
+  font-size: 15px;
+  font-weight: 500;
+  margin: 20px;
+  color: #85868d;
+  text-align: center;
+}
+
+.app-cadastro-pet__content-items__uploads-view > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 22px;
+}
+
+.app-cadastro-pet__content-items__uploads-view > div {
+  position: absolute;
+  bottom: -15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 100%;
+  display: flex;
+  z-index: 999;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  color: #fff;
+  background-color: rgba(19, 18, 18, 0.377);
+  backdrop-filter: blur(3px);
+  transition: all 0.3s ease;
+}
+
+.app-cadastro-pet__content-items__uploads-view > div:hover {
+  opacity: 0.8;
+}
