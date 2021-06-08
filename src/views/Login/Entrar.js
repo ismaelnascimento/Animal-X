@@ -7,18 +7,43 @@ import "../../styles/Login/Login.css";
 import Logo from "../../assets/images/Banner/LoginLeft.svg";
 import Pata from "../../assets/images/Complements/IlustratorPata.svg";
 import { useHistory } from "react-router-dom";
+//
+import { useStateValue } from "../../providers/StateProvider";
+import api from '../../service/service';
 
 function Entrar() {
   const history = useHistory();
-
+  const [{}, dispatch] = useStateValue();
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [viewSenha, setViewSenha] = useState(false);
 
-  const entrar = (e) => {
+  const entrar = async (e) => {
     e.preventDefault();
-
-    // handleEntrar
+     
+    const dataLogin = {
+      email: email,
+      password: senha
+  } 
+      let respLogin =  await api.post('auth',dataLogin)   
+      localStorage.setItem('TOKEN', respLogin.data.token);
+      localStorage.setItem("ID_USUARIO_LOGADO",respLogin.data.usuario.id); 
+      let user = { 
+        img_view: "https://photoanimalx.s3.us-east-2.amazonaws.com/"+respLogin.data.usuario.img_login,
+        cidade:respLogin.data.usuario.cidade,
+        email: respLogin.data.usuario.email,
+        estado: respLogin.data.usuario.estado, 
+        nome:  respLogin.data.usuario.nome, 
+        whatsapp:respLogin.data.usuario.whatsapp,
+        tipo_usuario:respLogin.data.usuario.tipo_usuario
+      } 
+      console.log(respLogin.data.usuario);
+    // handleCadastro
+       dispatch({
+          type: "SET_USER",
+          user: user,
+        });
+        history.push("/");
   };
 
   const handleEmail = (e) => {
