@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 //
 import { SiFacebook, SiTwitter, SiWhatsapp } from "react-icons/si";
+import { useHistory, useLocation } from "react-router-dom";
 
 //
 import WhatsApp from "../../assets/icons/WhatsApp";
@@ -124,54 +125,101 @@ function useOnClickOutside(ref, handler) {
 
 function CardPet(props) {
   const modalRef = useRef();
+  const history = useHistory();
 
   const [modalShare, setModalShare] = useState(false);
   useOnClickOutside(modalRef, () => setModalShare(false));
 
   var map = `https://www.google.com/maps/place/${props.cidade} ${props.estado}`;
 
-  var urlWEB = `https://animal--x.web.app`;
+  var urlWEB = `https://animal--x.web.app/pet/${props.id}`;
 
   var facebook = `https://www.facebook.com/sharer/sharer.php?u=${urlWEB}`;
   var whatsapp = `https://api.whatsapp.com/send?text=Ola vim do *Animal X* (${urlWEB}), eu encontrei um _${props.especie}_ chamado *${props.apelido}*`;
   var twitter = `https://twitter.com/intent/tweet?url=${urlWEB}&text=Ola vim do Animal X, eu encontrei um ${props.especie} chamado ${props.apelido}`;
 
+  const updateSituacao = (situacaoUpdate) => {
+    // HANDLE UPDATE SITUAÇÃO // situacaoUpdate
+  };
+
+  const BottomSituacao = () => (
+    <div className="animalX--card__situacao">
+      <button
+        style={{
+          color: props.situacao === "Adotado" ? "#fff" : "",
+          background:
+            props.situacao === "Adotado"
+              ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
+              : "",
+        }}
+        onClick={() => updateSituacao("Adotado")}
+      >
+        Adotado
+      </button>
+      <button
+        style={{
+          color: props.situacao === "Disponivel" ? "#fff" : "",
+          background:
+            props.situacao === "Disponivel"
+              ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
+              : "",
+        }}
+        onClick={() => updateSituacao("Disponivel")}
+      >
+        Disponivel
+      </button>
+    </div>
+  );
+
   return (
     <div>
-      {modalShare ? (
-        <div className="animalX--modal">
-          <div ref={modalRef} className="animalX--modal-share">
-            <div className="animalX--modal-share__header">
-              <BackLeft onClick={() => setModalShare(false)} />
+      <di
+        style={{
+          opacity: modalShare ? "5" : "0",
+          visibility: modalShare ? "visible" : "hidden",
+        }}
+        className="animalX--modal"
+      >
+        <div
+          style={{
+            transform: modalShare ? "scale(1)" : "scale(0.5)",
+            opacity: modalShare ? "5" : "0",
+            visibility: modalShare ? "visible" : "hidden",
+          }}
+          ref={modalRef}
+          className="animalX--modal-share"
+        >
+          <div className="animalX--modal-share__header">
+            <BackLeft onClick={() => setModalShare(false)} />
 
-              <p>Compartilhar para...</p>
+            <p>Compartilhar para...</p>
+          </div>
+
+          <div className="animalX--modal-share__content">
+            <div onClick={() => window.open(facebook)}>
+              <SiFacebook />
+
+              <p>Compartilhar no Facebook</p>
             </div>
+            <div onClick={() => window.open(twitter)}>
+              <SiTwitter />
 
-            <div className="animalX--modal-share__content">
-              <div onClick={() => window.open(facebook)}>
-                <SiFacebook />
+              <p>Compartilhar no Twitter</p>
+            </div>
+            <div onClick={() => window.open(whatsapp)}>
+              <SiWhatsapp />
 
-                <p>Compartilhar no Facebook</p>
-              </div>
-              <div onClick={() => window.open(twitter)}>
-                <SiTwitter />
-
-                <p>Compartilhar no Twitter</p>
-              </div>
-              <div onClick={() => window.open(whatsapp)}>
-                <SiWhatsapp />
-
-                <p>Compartilhar no Whatsapp</p>
-              </div>
+              <p>Compartilhar no Whatsapp</p>
             </div>
           </div>
         </div>
-      ) : (
-        ""
-      )}
-      
+      </di>
+
       <div className="animalX--card__pet">
-        <div className="animalX--card__pet-image">
+        <div
+          onClick={() => history.push(`/pet/${props.id}`)}
+          className="animalX--card__pet-image"
+        >
           <img src={props.image} alt="" />
         </div>
 
@@ -210,40 +258,52 @@ function CardPet(props) {
               />
             </div>
 
-            <div className="animalX--card__pet-content-infos__description">
-              <p>{props.descricao}</p>
-            </div>
+            {!props?.meus ? (
+              <div className="animalX--card__pet-content-infos__description">
+                <p>{props.descricao}</p>
+              </div>
+            ) : (
+              ""
+            )}
           </div>
         </div>
 
-        <a
-          href={`https://api.whatsapp.com/send?phone=${props.whatsapp}&text=Ola vim do *Animal X* (${urlWEB}), eu encontrei um _${props.especie}_ chamado *${props.apelido}* e eu queria adotar ele, Poderia me ajudar?`}
-          className="animalX--card__pet-whatsapp"
-          target="_blanck"
-        >
-          <WhatsApp />
-        </a>
-
-        <div className="animalX--card__ilustrator">
-          <svg
-            width="62"
-            height="51"
-            viewBox="0 0 62 51"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+        {!props?.meus ? (
+          <a
+            href={`https://api.whatsapp.com/send?phone=${props.whatsapp}&text=Ola vim do *Animal X* (${urlWEB}), eu encontrei um _${props.especie}_ chamado *${props.apelido}* e eu queria adotar ele, Poderia me ajudar?`}
+            className="animalX--card__pet-whatsapp"
+            target="_blanck"
           >
-            <path
-              d="M19.5453 23.1129C18.0412 22.6798 16.5371 22.4601 15.074 22.4601C12.8147 22.4601 10.9294 22.9764 9.46763 23.6087C10.8769 18.4494 14.2624 9.54725 21.0065 8.54473C21.631 8.45185 22.1428 8.00024 22.3132 7.39233L23.7872 2.12033C23.9115 1.67448 23.8378 1.19725 23.5835 0.810337C23.3292 0.423425 22.9205 0.16527 22.4625 0.102493C21.9648 0.0345914 21.4574 0 20.9546 0C12.8595 0 4.84263 8.44928 1.45971 20.5473C-0.526098 27.645 -1.10839 38.3158 3.7831 45.0323C6.52031 48.7906 10.5137 50.7976 15.6525 50.9981C15.6736 50.9987 15.6941 50.9994 15.7152 50.9994C22.0557 50.9994 27.6781 46.7292 29.3885 40.6161C30.4102 36.9616 29.9483 33.129 28.0868 29.8217C26.2451 26.5515 23.212 24.1679 19.5453 23.1129Z"
-              fill="#C2EBFF"
-              fill-opacity="0.3"
-            />
-            <path
-              d="M59.2353 29.8223C57.3936 26.5515 54.3605 24.1679 50.6938 23.1129C49.1897 22.6798 47.6856 22.4601 46.2231 22.4601C43.9638 22.4601 42.0779 22.9764 40.6161 23.6087C42.0254 18.4494 45.4109 9.54725 52.1556 8.54473C52.7801 8.45185 53.2913 8.00024 53.4624 7.39233L54.9363 2.12033C55.0606 1.67448 54.9869 1.19725 54.7326 0.810337C54.479 0.423425 54.0703 0.16527 53.6116 0.102493C53.1145 0.0345914 52.6072 0 52.1037 0C44.0086 0 35.9917 8.44928 32.6082 20.5473C30.623 27.645 30.0407 38.3158 34.9329 45.0336C37.6694 48.7913 41.6635 50.7989 46.8016 50.9987C46.8227 50.9994 46.8432 51 46.865 51C53.2048 51 58.8279 46.7299 60.5382 40.6168C61.5587 36.9623 61.0962 33.129 59.2353 29.8223Z"
-              fill="#C2EBFF"
-              fill-opacity="0.3"
-            />
-          </svg>
-        </div>
+            <WhatsApp />
+          </a>
+        ) : (
+          <BottomSituacao />
+        )}
+
+        {!props?.meus ? (
+          <div className="animalX--card__ilustrator">
+            <svg
+              width="62"
+              height="51"
+              viewBox="0 0 62 51"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M19.5453 23.1129C18.0412 22.6798 16.5371 22.4601 15.074 22.4601C12.8147 22.4601 10.9294 22.9764 9.46763 23.6087C10.8769 18.4494 14.2624 9.54725 21.0065 8.54473C21.631 8.45185 22.1428 8.00024 22.3132 7.39233L23.7872 2.12033C23.9115 1.67448 23.8378 1.19725 23.5835 0.810337C23.3292 0.423425 22.9205 0.16527 22.4625 0.102493C21.9648 0.0345914 21.4574 0 20.9546 0C12.8595 0 4.84263 8.44928 1.45971 20.5473C-0.526098 27.645 -1.10839 38.3158 3.7831 45.0323C6.52031 48.7906 10.5137 50.7976 15.6525 50.9981C15.6736 50.9987 15.6941 50.9994 15.7152 50.9994C22.0557 50.9994 27.6781 46.7292 29.3885 40.6161C30.4102 36.9616 29.9483 33.129 28.0868 29.8217C26.2451 26.5515 23.212 24.1679 19.5453 23.1129Z"
+                fill="#C2EBFF"
+                fill-opacity="0.3"
+              />
+              <path
+                d="M59.2353 29.8223C57.3936 26.5515 54.3605 24.1679 50.6938 23.1129C49.1897 22.6798 47.6856 22.4601 46.2231 22.4601C43.9638 22.4601 42.0779 22.9764 40.6161 23.6087C42.0254 18.4494 45.4109 9.54725 52.1556 8.54473C52.7801 8.45185 53.2913 8.00024 53.4624 7.39233L54.9363 2.12033C55.0606 1.67448 54.9869 1.19725 54.7326 0.810337C54.479 0.423425 54.0703 0.16527 53.6116 0.102493C53.1145 0.0345914 52.6072 0 52.1037 0C44.0086 0 35.9917 8.44928 32.6082 20.5473C30.623 27.645 30.0407 38.3158 34.9329 45.0336C37.6694 48.7913 41.6635 50.7989 46.8016 50.9987C46.8227 50.9994 46.8432 51 46.865 51C53.2048 51 58.8279 46.7299 60.5382 40.6168C61.5587 36.9623 61.0962 33.129 59.2353 29.8223Z"
+                fill="#C2EBFF"
+                fill-opacity="0.3"
+              />
+            </svg>
+          </div>
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

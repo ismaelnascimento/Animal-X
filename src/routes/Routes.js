@@ -17,6 +17,7 @@ import RecuperarSenha from "../views/Login/RecuperarSenha";
 import CadastroPet from "../views/Pets/CadastroPet";
 import MeusPets from "../views/Pets/MeusPets";
 import { useStateValue } from "../providers/StateProvider";
+import DetailsPet from "../views/DetailsPet/DetailsPet";
 
 function Routes() {
   const [{ user }] = useStateValue();
@@ -28,6 +29,10 @@ function Routes() {
           <Header />
 
           <Content />
+        </Route>
+
+        <Route path="/pet/:petId">
+          <DetailsPet />
         </Route>
 
         <Route path="/entrar">

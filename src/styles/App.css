@@ -8,6 +8,7 @@
   border-top-color: #fff;
   animation: 1s loading infinite linear;
   transition: all 0.3s ease;
+  margin: auto;
   margin-top: 35px;
   margin-bottom: 95px;
 }

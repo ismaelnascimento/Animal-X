@@ -58,6 +58,7 @@ function FilterHeader() {
     window.scrollTo({ top: 405 });
     setSearch("");
     setModalSearch(false);
+    history.push("/");
   };
 
   return (

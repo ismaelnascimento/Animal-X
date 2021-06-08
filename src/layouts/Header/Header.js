@@ -14,7 +14,7 @@ import Cachorro from "../../assets/images/cachorro.svg";
 import FilterHeader from "../../components/Filter/FilterHeader";
 
 //
-import { useHistory } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 import { useStateValue } from "../../providers/StateProvider";
 
 function useOnClickOutside(ref, handler) {
@@ -40,6 +40,7 @@ function useOnClickOutside(ref, handler) {
 
 function Header() {
   const history = useHistory();
+  const location = useLocation();
   const [{ user }, dispatch] = useStateValue();
 
   const [modalUser, setModalUser] = useState(false);
@@ -83,9 +84,21 @@ function Header() {
             </button>
           ) : (
             <button
-              title="Cadastro de seu amiguinho"
-              onClick={() => history.push("/cadastro-pet")}
+              title={
+                location.pathname === "/cadastro-pet"
+                  ? "Sair do cadastro de seu amiguinho"
+                  : "Cadastro de seu amiguinho"
+              }
+              onClick={() =>
+                location.pathname === "/cadastro-pet"
+                  ? history.goBack()
+                  : history.push("/cadastro-pet")
+              }
               className="animalX--header__right-add"
+              style={{
+                transform:
+                  location.pathname === "/cadastro-pet" ? "rotate(45deg)" : "",
+              }}
             >
               <IconAdd />
             </button>
@@ -133,7 +146,10 @@ function Header() {
             <h5>{user?.email}</h5>
           </div>
           <div
-            onClick={() => history.push("/meus-pets")}
+            onClick={() => {
+              history.push("/meus-pets");
+              setModalUser(false);
+            }}
             className="animalX--modal-user__opt"
           >
             <IconPainel />
@@ -162,8 +178,9 @@ function Header() {
 
 export default Header;
 
-const IconAdd = () => (
+const IconAdd = ({ ...rest }) => (
   <svg
+    {...rest}
     width="24"
     height="24"
     viewBox="0 0 24 24"

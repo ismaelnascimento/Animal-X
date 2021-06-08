@@ -18,6 +18,7 @@
   position: absolute;
   margin: auto;
   height: auto;
+  transition: all 0.2s ease;
   overflow: hidden;
   border-radius: 10px;
   background-color: #fff;
@@ -59,6 +60,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
+  transition: all 0.3s ease;
   padding-bottom: 8px;
 }
 
@@ -144,7 +146,7 @@
   background-color: #fff;
   width: 290px;
   height: auto;
-  border-radius: 22px;
+  border-radius: 15px;
   z-index: 999;
   position: absolute;
   padding: 8px;

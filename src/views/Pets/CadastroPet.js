@@ -43,6 +43,42 @@ function CadastroPet() {
     renderFt(upload3, setUploadView3);
   }, [upload1, upload2, upload3]);
 
+  const [checkedSituacao, setCheckedSituacao] = useState(true);
+  const [apelido, setApelido] = useState("");
+  const [raca, setRaca] = useState("");
+  const [descricao, settDescricao] = useState("");
+  const [especie, setEspecie] = useState("");
+  const [categoria, setCategoria] = useState("Gatos");
+  const [altura, setAltura] = useState();
+  const [idade, setIdade] = useState();
+  const [typeIdade, setTypeIdade] = useState("anos");
+  const [peso, setPeso] = useState();
+  const [tamanho, setTamanho] = useState("P");
+  const [sexo, setSexo] = useState("Feminino");
+
+  const addPet = (e) => {
+    e.preventDefault();
+
+    // HANDLE ADICIONAR PET
+    setUpload1(null);
+    setUploadView1("");
+    setUpload2(null);
+    setUploadView2("");
+    setUpload3(null);
+    setUploadView3("");
+    setCheckedSituacao(true);
+    setApelido("");
+    setRaca("");
+    settDescricao("");
+    setEspecie("");
+    setCategoria("Gatos");
+    setAltura();
+    setTamanho();
+    setIdade();
+    setPeso();
+    setSexo("Feminino");
+  };
+
   return (
     <div className="app-cadastro-pet">
       <div className="app-cadastro-pet__back">
@@ -150,6 +186,184 @@ function CadastroPet() {
               ""
             )}
           </div>
+
+          <div className="app-cadastro-pet__content-items__inputs">
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Apelido</p>
+              <input
+                onChange={(e) => setApelido(e.target.value)}
+                value={apelido}
+                type="text"
+                placeholder="Digite o apelido do pet"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Raça</p>
+              <input
+                onChange={(e) => setRaca(e.target.value)}
+                value={raca}
+                type="text"
+                placeholder="Digite o raça do pet ex: Siamês"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Descrição</p>
+              <textarea
+                onChange={(e) => settDescricao(e.target.value)}
+                value={descricao}
+                placeholder="Descrição do pet"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Especie</p>
+              <input
+                onChange={(e) => setEspecie(e.target.value)}
+                value={especie}
+                type="text"
+                placeholder="Especie do seu pet ex: gato"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Categoria</p>
+
+              <section>
+                <select
+                  onChange={(e) => setCategoria(e.target.value)}
+                  value={categoria}
+                  id="categoria-pet-add"
+                >
+                  <option value="Gatos">Gatos</option>
+                  <option value="Cachorros">Cachorros</option>
+                  <option value="Outros">Outros</option>
+                </select>
+              </section>
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Altura</p>
+              <input
+                onChange={(e) => setAltura(e.target.value)}
+                value={altura}
+                type="number"
+                placeholder="Altura do seu pet"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Idade</p>
+
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  flexWrap: "wrap",
+                }}
+              >
+                <input
+                  style={{ margin: "4px", flex: '1' }}
+                  onChange={(e) => setIdade(e.target.value)}
+                  value={idade}
+                  type="text"
+                  placeholder="Idade do seu pet"
+                />
+                <section style={{ margin: "4px", flex: '1' }}>
+                  <select
+                    onChange={(e) => setTypeIdade(e.target.value)}
+                    value={typeIdade}
+                    id="type-idade-pet-add"
+                  >
+                    <option value="anos">anos</option>
+                    <option value="meses">meses</option>
+                  </select>
+                </section>
+              </div>
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Peso</p>
+              <input
+                onChange={(e) => setPeso(e.target.value)}
+                value={peso}
+                type="number"
+                placeholder="Peso do seu pet"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Tamanho</p>
+
+              <section>
+                <select
+                  onChange={(e) => setTamanho(e.target.value)}
+                  value={tamanho}
+                  id="tamanho-pet-add"
+                >
+                  <option value="P">P</option>
+                  <option value="M">M</option>
+                  <option value="G">G</option>
+                </select>
+              </section>
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Sexo</p>
+
+              <section>
+                <select
+                  onChange={(e) => setSexo(e.target.value)}
+                  value={sexo}
+                  id="sexo-pet-add"
+                >
+                  <option value="Feminino">Feminino</option>
+                  <option value="Masculino">Masculino</option>
+                  <option value="Outro">Outro</option>
+                </select>
+              </section>
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Situação</p>
+
+              <div>
+                <div className="cbx">
+                  <input
+                    checked={checkedSituacao}
+                    onChange={() => setCheckedSituacao(!checkedSituacao)}
+                    type="checkbox"
+                    name="Situação"
+                    id="cbx"
+                  />
+                  <label htmlFor="cbx"></label>
+                  <svg width="15" height="14" viewbox="0 0 15 14" fill="none">
+                    <path d="M2 8.36364L6.23077 12L13 2"></path>
+                  </svg>
+                </div>
+
+                <p>Disponivel</p>
+              </div>
+            </div>
+          </div>
+
+          {uploadView1 !== "" &&
+          apelido !== "" &&
+          raca !== "" &&
+          descricao !== "" &&
+          especie !== "" &&
+          altura !== undefined &&
+          altura !== null &&
+          idade !== undefined &&
+          peso !== undefined &&
+          peso !== null ? (
+            <button onClick={(e) => addPet(e)}>Adicionar</button>
+          ) : (
+            <button style={{ opacity: "0.5", cursor: "auto" }}>
+              Adicionar
+            </button>
+          )}
         </div>
       </div>
     </div>

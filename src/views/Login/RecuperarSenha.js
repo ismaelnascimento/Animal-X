@@ -12,11 +12,31 @@ function Entrar() {
   const history = useHistory();
 
   const [email, setEmail] = useState("");
+  const [codeView, setCodeView] = useState("");
+  const [codigo, setCodigo] = useState("");
 
   const recuperarSenha = (e) => {
     e.preventDefault();
 
     // handle RecuperarSenha
+    setCodeView(true);
+    setEmail("");
+  };
+
+  const concluedCode = (e) => {
+    e.preventDefault();
+
+    // handle ConcluedCode
+    setCodeView(false);
+    setCodigo("");
+  };
+
+  const handleCode = (e) => {
+    if (codigo !== "") {
+      if (e.key === "Enter") {
+        concluedCode(e);
+      }
+    }
   };
 
   const handleEmail = (e) => {
@@ -51,30 +71,57 @@ function Entrar() {
         </section>
       </div>
 
-      <div className="animalX--login-right">
-        <PataAzulTop className="animalX--login-right__pata-top" />
-        <PataAzulBottom className="animalX--login-right__pata-bottom" />
+      {codeView ? (
+        <div className="animalX--login-right">
+          <PataAzulTop className="animalX--login-right__pata-top" />
+          <PataAzulBottom className="animalX--login-right__pata-bottom" />
 
-        <p>Recuperar senha</p>
+          <p>Código do email</p>
 
-        <div className="animalX--login__input-form">
-          <p>E-mail</p>
-          <div>
-            <IconEmail />
-            <input
-              style={{ marginRight: "12px" }}
-              autoComplete="new-password"
-              placeholder="Escreva seu email de recuperação"
-              type="text"
-              value={email}
-              onKeyUp={(e) => handleEmail(e)}
-              onChange={(e) => setEmail(e.target.value)}
-            />
+          <div className="animalX--login__input-form">
+            <p>Código</p>
+            <div>
+              <IconEmail />
+              <input
+                style={{ marginRight: "12px" }}
+                autoComplete="new-password"
+                placeholder="Insira o código do email"
+                type="text"
+                value={codigo}
+                onKeyUp={(e) => handleCode(e)}
+                onChange={(e) => setCodigo(e.target.value)}
+              />
+            </div>
           </div>
-        </div>
 
-        <button onClick={(e) => recuperarSenha(e)}>Concluir</button>
-      </div>
+          <button onClick={(e) => concluedCode(e)}>Concluir</button>
+        </div>
+      ) : (
+        <div className="animalX--login-right">
+          <PataAzulTop className="animalX--login-right__pata-top" />
+          <PataAzulBottom className="animalX--login-right__pata-bottom" />
+
+          <p>Recuperar senha</p>
+
+          <div className="animalX--login__input-form">
+            <p>E-mail</p>
+            <div>
+              <IconEmail />
+              <input
+                style={{ marginRight: "12px" }}
+                autoComplete="new-password"
+                placeholder="Escreva seu email de recuperação"
+                type="text"
+                value={email}
+                onKeyUp={(e) => handleEmail(e)}
+                onChange={(e) => setEmail(e.target.value)}
+              />
+            </div>
+          </div>
+
+          <button onClick={(e) => recuperarSenha(e)}>Concluir</button>
+        </div>
+      )}
     </div>
   );
 }

@@ -44,7 +44,13 @@
   object-fit: cover;
   width: 100%;
   height: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
   border-radius: 22px 22px 15px 15px;
+}
+
+.animalX--card__pet-image > img:hover {
+  opacity: 0.7;
 }
 
 .animalX--card__pet-content {
@@ -111,6 +117,41 @@
   text-align: center;
   color: #f7b803;
 }
+
+/* SITUAÇÃO */
+
+.animalX--card__situacao {
+  background: #fde0ad;
+  border: 2px solid #ef9a13;
+  box-sizing: border-box;
+  border-radius: 57px;
+  width: 92%;
+  margin-top: -20px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  padding: 3px;
+}
+
+.animalX--card__situacao > button {
+  border: none;
+  outline: none;
+  width: 100%;
+  cursor: pointer;
+  height: 100%;
+  font-weight: 500;
+  font-size: 16.5px;
+  color: #ef9a13;
+  background-color: rgba(0, 0, 0, 0);
+  border-radius: 57px;
+  transition: all 0.3s ease;
+}
+
+.animalX--card__situacao > button:hover {
+  opacity: 0.7;
+}
+
+/**/
 
 .animalX--card__ilustrator {
   position: absolute;
