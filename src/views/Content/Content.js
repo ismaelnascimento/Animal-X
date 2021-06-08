@@ -42,13 +42,8 @@ function Content() {
 
   async function data() {
     const resp = await api.get("animal/animaisAdocao");
-    if (resp.data.content?.length !== 0) {
-      setNotPets(false);
-      setGetPets(resp.data.content);
-    } else {
-      setNotPets(true);
-      setGetPets([]);
-    }
+    setNotPets(false);
+    setGetPets(resp.data.content);
   }
 
   useEffect(() => {
@@ -82,6 +77,14 @@ function Content() {
       }
     }
   }, [activeCategory, getPets, searchPets, filter]);
+
+  useEffect(() => {
+    if (filterPets?.length !== 0) {
+      setNotPets(false);
+    } else {
+      setNotPets(true);
+    }
+  }, [filterPets, pets, notPets]);
 
   return (
     <div style={{ position: "relative" }}>

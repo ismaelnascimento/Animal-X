@@ -83,13 +83,13 @@ function CadastroPet() {
                 style={{ border: "none", cursor: "auto" }}
                 className="app-cadastro-pet__content-items__uploads-view"
               >
-                <div>
-                  <CgClose
-                    onClick={() => {
-                      setUpload1(null);
-                      setUploadView1("");
-                    }}
-                  />
+                <div
+                  onClick={() => {
+                    setUpload1(null);
+                    setUploadView1("");
+                  }}
+                >
+                  <CgClose />
                 </div>
 
                 <img src={uploadView1} alt="" />
@@ -109,13 +109,13 @@ function CadastroPet() {
                 className="app-cadastro-pet__content-items__uploads-view"
               >
                 {" "}
-                <div>
-                  <CgClose
-                    onClick={() => {
-                      setUpload2(null);
-                      setUploadView2("");
-                    }}
-                  />
+                <div
+                  onClick={() => {
+                    setUpload2(null);
+                    setUploadView2("");
+                  }}
+                >
+                  <CgClose />
                 </div>
                 <img src={uploadView2} alt="" />
               </div>
@@ -136,13 +136,13 @@ function CadastroPet() {
                 className="app-cadastro-pet__content-items__uploads-view"
               >
                 {" "}
-                <div>
-                  <CgClose
-                    onClick={() => {
-                      setUpload3(null);
-                      setUploadView3("");
-                    }}
-                  />
+                <div
+                  onClick={() => {
+                    setUpload3(null);
+                    setUploadView3("");
+                  }}
+                >
+                  <CgClose />
                 </div>
                 <img src={uploadView3} alt="" />
               </div>

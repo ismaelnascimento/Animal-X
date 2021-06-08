@@ -145,6 +145,7 @@
   width: 290px;
   height: auto;
   border-radius: 22px;
+  z-index: 999;
   position: absolute;
   padding: 8px;
   top: 12px;
@@ -164,6 +165,7 @@
   width: 92px;
   height: 92px;
   border-radius: 100%;
+  object-fit: cover;
 }
 
 .animalX--modal-user__infos > p {
