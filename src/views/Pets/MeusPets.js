@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //
 import "../../styles/Pets/MeusPets.css";
@@ -303,6 +303,10 @@ function MeusPets() {
       ],
     },
   ]);
+  
+  useEffect(() => {
+    document.title = "Meus amiguinhos | Animal X";
+  }, []);
 
   return (
     <div className="app-cadastro-pet">

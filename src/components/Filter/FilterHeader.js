@@ -59,6 +59,7 @@ function FilterHeader() {
     setSearch("");
     setModalSearch(false);
     history.push("/");
+    document.title = "Animal X";
   };
 
   return (
@@ -106,6 +107,7 @@ function FilterHeader() {
                 filter: "",
               });
               history.push("/");
+              document.title = "Animal X";
             }}
           >
             {category}

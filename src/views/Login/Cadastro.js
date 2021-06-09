@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 //
 import "../../styles/Login/Login.css";
@@ -16,7 +16,7 @@ import { useStateValue } from "../../providers/StateProvider";
 
 //
 import UserNull from "../../assets/images/user/usernull.png";
-import api from '../../service/service';
+import api from "../../service/service";
 
 function Cadastro() {
   const history = useHistory();
@@ -30,59 +30,85 @@ function Cadastro() {
   const [viewSenha, setViewSenha] = useState(false);
   const [whatsapp, setWhatsapp] = useState("");
 
-  const cadastro = async (e)   => {
+  const cadastro = async (e) => {
     e.preventDefault();
-    var user
-    const headers = {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Access-Control-Allow-Origin': '*', 
-    };
 
-    await fetch(
-      "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
-    )
-      .then((response) => response.json())
-      .then((data) => {
+    if (upload) {
+      var user;
+      const headers = {
+        "Content-Type": "application/json;charset=utf-8",
+        "Access-Control-Allow-Origin": "*",
+      };
+
+      await fetch(
+        "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
+      )
+        .then((response) => response.json())
+        .then((data) => {
           user = {
-          img_file: upload ? upload : null,
-          img_view: upload ? uploadView : UserNull,
-          cidade: data?.city,
-          email: email,
-          estado: data?.state, 
-          nome: name,
-          senha: senha,
-          whatsapp: whatsapp,
-        };
-         
-      });
-    const resp = await api.post('usuario/salvar',user,headers); 
-    const dataLogin = {
+            img_view: upload ? uploadView : UserNull,
+            cidade: data?.city,
+            img_file: upload ? upload : null,
+            email: email,
+            estado: data?.state,
+            nome: name,
+            senha: senha,
+            whatsapp: whatsapp,
+          };
+        });
+      const resp = await api.post("usuario/salvar", user, headers);
+      const dataLogin = {
         email: email,
-        password: senha
-    } 
-    let respLogin =  await api.post('auth',dataLogin)   
-        localStorage.setItem('TOKEN', respLogin.data.token);
-        localStorage.setItem("ID_USUARIO_LOGADO",respLogin.data.usuario.id); 
-        uploadImage();
-         user = { 
-          img_view: "https://photoanimalx.s3.us-east-2.amazonaws.com/"+respLogin.data.usuario.img_login, 
-          tipo_usuario:respLogin.data.usuario.tipo_usuario
-        }  
-          // handleCadastro
-          dispatch({
-            type: "SET_USER",
-            user: user,
-          });
-  
-          history.push("/");
-         
-  }; 
-  async function uploadImage(){ 
-    if (upload) { 
-      let dataUpload = new FormData();  
-      dataUpload.append('file',upload,upload.name);  
-      var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN') } };   
-      await api.post(`usuario/uploadFotoPerfil/${localStorage.getItem('ID_USUARIO_LOGADO')}`,dataUpload,config); 
+        password: senha,
+      };
+      let respLogin = await api.post("auth", dataLogin);
+      localStorage.setItem("TOKEN", respLogin.data.token);
+      localStorage.setItem("ID_USUARIO_LOGADO", respLogin.data.usuario.id);
+      uploadImage();
+
+      await fetch(
+        "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
+      )
+        .then((response) => response.json())
+        .then((data) => {
+          user = {
+            img_view:
+              "https://photoanimalx.s3.us-east-2.amazonaws.com/" +
+              respLogin.data.usuario.img_login,
+            tipo_usuario: respLogin.data.usuario.tipo_usuario,
+            img_file: upload ? upload : null,
+            cidade: data?.city,
+            email: email,
+            estado: data?.state,
+            nome: name,
+            senha: senha,
+            whatsapp: whatsapp,
+          };
+        });
+
+      // handleCadastro
+      dispatch({
+        type: "SET_USER",
+        user: user,
+      });
+
+      history.push("/");
+      document.title = "Animal X";
+    }
+  };
+
+  async function uploadImage() {
+    if (upload) {
+      let dataUpload = new FormData();
+      dataUpload.append("file", upload, upload.name);
+      var config = {
+        headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
+      };
+      await api.post(
+        `usuario/uploadFotoPerfil/${localStorage.getItem("ID_USUARIO_LOGADO")}`,
+        dataUpload,
+        config
+      );
     }
   }
 
@@ -154,6 +180,10 @@ function Cadastro() {
     };
     reader.readAsDataURL(upload);
   }
+
+  useEffect(() => {
+    document.title = "Cadastro | Animal X";
+  }, []);
 
   return (
     <div className="animalX--login">
@@ -301,7 +331,7 @@ function Cadastro() {
         </div>
 
         <button style={{ marginTop: 7 }} onClick={(e) => cadastro(e)}>
-          Entrar
+          Cadastrar
         </button>
       </div>
     </div>

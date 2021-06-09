@@ -16,13 +16,186 @@
   justify-content: center;
   align-items: center;
   flex: 1;
-  padding: 20px;
+  padding: 15px;
+}
+
+.app-details-pet__right > section {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 35px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.app-details-pet__right > section:hover {
+  opacity: 0.7;
+}
+
+.app-details-pet__right > section > svg {
+  width: 38px;
+  height: 38px;
+}
+
+.app-details-pet__right > section > svg path {
+  fill: rgb(71, 72, 78);
+}
+
+.app-details-pet__right > section > p {
+  font-size: 20px;
+  font-weight: 500;
+  margin-left: 12px;
+  color: rgb(71, 72, 78);
 }
 
 .app-details-pet__left {
   flex: 1;
   display: flex;
   flex-direction: column;
+  padding: 30px 15px;
+}
+
+.app-details-pet__left-bottom {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 12px;
+  width: 100%;
+}
+
+.app-details-pet__left-bottom > a {
+  width: 50px;
+  height: 50px;
+  margin: 0 10px;
+}
+
+.app-details-pet__left-bottom > a > svg {
+  width: 50px;
+  height: 50px;
+}
+
+.app-details-pet__left-bottom > svg {
+  width: 30px;
+  height: 30px;
+  cursor: pointer;
+}
+
+.app-details-pet__left-bottom svg {
+  transition: all 0.3s ease;
+}
+
+.app-details-pet__left-bottom svg:hover {
+  opacity: 0.7;
+}
+
+.app-details-pet__left > p {
+  font-size: 35px;
+  font-weight: 600;
+  color: #3a3c44f2;
+  margin-bottom: 5px;
+}
+
+.app-details-pet__left-infos {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: -5px;
+}
+
+.app-details-pet__left-infos > div {
+  padding: 11px;
+  flex: 1;
+  border-radius: 15px;
+  border: 1px solid #f3f4f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.app-details-pet__left-infos > div > h5 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #33353d;
+  margin: 0 5px;
+}
+
+.app-details-pet__left-infos > div > p {
+  font-size: 13px;
+  font-weight: 400;
+  margin: 0 5px;
+  color: #87898f;
+}
+
+.app-details-pet__left-itens {
+  display: flex;
+  flex-direction: column;
+  margin-top: 5px;
+}
+
+.app-details-pet__left-itens > div {
+  margin: 9px 0;
+  display: flex;
+  align-items: center;
+}
+
+.app-details-pet__left-itens > div > svg {
+  width: 25px;
+  height: 25px;
+}
+
+.app-details-pet__left-itens > div > svg path {
+  fill: #58585f;
+}
+
+.app-details-pet__left-itens > div > p {
+  margin-left: 10px;
+  color: #58585f;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.app-details-pet__left-itens > div > p > strong {
+  font-weight: 500;
+  color: #f7b803;
+}
+
+.app-details-pet__left-user {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.app-details-pet__left-user > img {
+  width: 45px;
+  height: 45px;
+  object-fit: cover;
+  margin-right: 12px;
+}
+
+.app-details-pet__left-user > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.app-details-pet__left-user > div > p {
+  font-size: 16px;
+  font-weight: 600;
+  color: #33353d;
+}
+
+.app-details-pet__left-user > div > h5 {
+  font-size: 13px;
+  color: #87898f;
+  font-weight: 400;
+}
+
+.app-details-pet__left-descricao {
+  font-size: 16px;
+  color: #7a7b81;
+  margin: 21px 0;
 }
 
 /**/
@@ -34,7 +207,7 @@
 .awssld__bullets .awssld__bullets--active {
   background-color: var(--color-primary) !important;
   transform: initial !important;
-  width: 35px !important;
+  width: 28px !important;
 }
 
 .awssld__container figure,
@@ -61,8 +234,8 @@
 
 .awssld__bullets button {
   background-color: #ebebf1 !important;
-  width: 22px !important;
-  height: 7px !important;
+  width: 20px !important;
+  height: 6px !important;
   border-radius: 30px !important;
   transition: width 0.3s cubic-bezier(0.8, 1.35, 0.75, 1.45),
     background-color 0.175s ease-out, transform 0.3s ease !important;
@@ -85,13 +258,19 @@
   background-color: #fff !important;
 }
 
+@media (max-width: 820px) {
+  .app-details-pet {
+    flex-direction: column;
+  }
+}
+
 .awssld {
   --organic-arrow-thickness: 2px;
   --organic-arrow-height: 30px;
   --slider-height-percentage: 59%;
   --loader-bar-color: var(--color-primary);
   --loader-bar-height: 6px;
-  --control-button-width: 13%;
+  --control-button-width: 15%;
   --control-button-height: 25%;
   --control-button-opacity: 0.5;
   --control-button-hover-opacity: 0.75;

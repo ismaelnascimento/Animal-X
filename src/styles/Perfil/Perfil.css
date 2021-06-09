@@ -1,0 +1,86 @@
+.app-pefil {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.app-pefil > button {
+  background-color: var(--color-primary);
+  border-radius: 13px;
+  padding: 12px 45px;
+  border-radius: 18px;
+  font-weight: 500;
+  font-size: 16px;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.app-pefil > button:hover {
+  opacity: 0.7;
+}
+
+/**/
+
+.app-pefil_image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 148px;
+  height: 148px;
+  border-radius: 100%;
+  position: relative;
+  margin-top: -88px;
+}
+
+.app-pefil_image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 100%;
+}
+
+.app-pefil_image > label {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 42px;
+  height: 42px;
+  border-radius: 100%;
+  background-color: #2e333662;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  border-radius: 100%;
+  z-index: 1;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.app-pefil_image > label > svg path {
+  fill: #fff;
+}
+
+.app-pefil_image > svg {
+  position: absolute;
+  margin: auto;
+  color: #fff;
+  width: 32px;
+  height: 32px;
+  padding: 5px;
+  cursor: pointer;
+  border-radius: 100%;
+  background-color: #2e333662;
+  backdrop-filter: blur(3px);
+  z-index: 1;
+  transition: all 0.3s ease;
+}
+
+.app-pefil_image > label:hover,
+.app-pefil_image > svg:hover {
+  background-color: #2e333680;
+}

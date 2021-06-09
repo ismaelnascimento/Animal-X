@@ -18,6 +18,12 @@ import CadastroPet from "../views/Pets/CadastroPet";
 import MeusPets from "../views/Pets/MeusPets";
 import { useStateValue } from "../providers/StateProvider";
 import DetailsPet from "../views/DetailsPet/DetailsPet";
+import NewSenha from "../views/Login/NewSenha";
+import Perfil from "../views/Perfil/Perfil";
+
+import PrivateRoute from "./PrivateRoute";
+import PrivateRouteRelatorios from "./PrivateRouteRelatorios";
+import Relatorio from "../views/Relatorios/Relatorio";
 
 function Routes() {
   const [{ user }] = useStateValue();
@@ -31,8 +37,16 @@ function Routes() {
           <Content />
         </Route>
 
+        <PrivateRouteRelatorios path="/relatorios" component={Relatorio} />
+
+        <PrivateRoute path="/perfil" component={Perfil} />
+
         <Route path="/pet/:petId">
           <DetailsPet />
+        </Route>
+
+        <Route path="/nova-senha">
+          <NewSenha />
         </Route>
 
         <Route path="/entrar">

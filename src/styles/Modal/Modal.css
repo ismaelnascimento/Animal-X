@@ -160,7 +160,13 @@
   align-items: center;
   flex-direction: column;
   padding-top: 12px;
-  padding-bottom: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.animalX--modal-user__infos:hover {
+  opacity: 0.7;
 }
 
 .animalX--modal-user__infos > img {

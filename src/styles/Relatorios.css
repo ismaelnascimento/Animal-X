@@ -1,0 +1,45 @@
+.app-relatorio {
+  display: flex;
+  flex-direction: column;
+  padding: 90px 40px;
+}
+
+.app-relatorio > p {
+  font-size: 32px;
+  font-weight: 600;
+  text-align: center;
+  color: rgb(37, 40, 44);
+  margin-bottom: 12px;
+}
+
+.app-relatorio__infos {
+  background-color: #f2f3f8;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  margin: 20px;
+  border-radius: 25px;
+}
+
+.app-relatorio__infos > p {
+  font-size: 16px;
+  font-weight: 400;
+  color: rgb(115, 117, 124);
+}
+
+.app-relatorio__infos > h5 {
+  font-size: 27px;
+  font-weight: 600;
+  color: rgb(48, 50, 56);
+  margin-top: 10px;
+}
+
+@media (max-width: 450px) {
+  .app-relatorio {
+    padding: 90px 0px;
+  }
+  .app-relatorio > p {
+    font-size: 31px;
+    margin-bottom: 5px;
+  }
+}
