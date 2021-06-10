@@ -10,6 +10,8 @@ import ButtonFilter from "../Buttons/ButtonFilter";
 import Search from "../../assets/icons/Search";
 import { useHistory } from "react-router-dom";
 
+import api from "../../service/service";
+
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
     const listener = (event) => {
@@ -40,14 +42,42 @@ function FilterHeader() {
   const [search, setSearch] = useState("");
 
   const modalRef = useRef();
-
   useOnClickOutside(modalRef, () => setModalSearch(false));
 
-  const [categorys, setCategorys] = useState([
-    "Gatos",
-    "Cachorros",
-    "Outros",
-  ]);
+  const [categorys, setCategorys] = useState(["Gatos", "Cachorros", "Outros"]);
+
+  const [pets, setPets] = useState([]);
+
+  async function data() {
+    const resp = await api.get("animal/animaisAdocao?pageSize=1000");
+    setPets(resp.data.content);
+  }
+
+  useEffect(() => {
+    data();
+  });
+
+  const removeDuplicateLoja = (data, key) => {
+    return [...new Map(data.map((x) => [key(x), x])).values()];
+  };
+
+  const racasPets = useMemo(() => {
+    var newpet = removeDuplicateLoja(pets, (it) => it?.raca);
+
+    return newpet;
+  }, [pets]);
+
+  const idadesPets = useMemo(() => {
+    var newIdade = removeDuplicateLoja(pets, (it) => it?.idade);
+
+    return newIdade;
+  }, [pets]);
+
+  const localizacoesPets = useMemo(() => {
+    var newCidade = removeDuplicateLoja(pets, (it) => it?.usuario?.cidade);
+
+    return newCidade;
+  }, [pets]);
 
   const searchSubmit = (e) => {
     dispatchSearch({
@@ -117,26 +147,12 @@ function FilterHeader() {
 
       <div className="animalX--filter__types">
         <div className="animalX--filter__types-filters">
-          <ButtonFilter
-            name={"Raça"}
-            items={[
-              "Buldogue",
-              "Pastor-alemão",
-              "Siamês",
-              "Gato manês",
-              "Vira-lata",
-            ]}
-            borderRight={""}
-          />
-          <ButtonFilter
-            name={"Idade"}
-            borderRight={""}
-            items={["5 anos", "2 anos", "3 meses"]}
-          />
+          <ButtonFilter name={"Raça"} items={racasPets} borderRight={""} />
+          <ButtonFilter name={"Idade"} borderRight={""} items={idadesPets} />
           <ButtonFilter
             name={"Localização"}
             borderRight={"1px solid rgba(0, 0, 0, 0)"}
-            items={["Fortaleza CE", "Pacajus CE", "Horizonte CE"]}
+            items={localizacoesPets}
           />
         </div>
 

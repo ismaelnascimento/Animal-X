@@ -45,7 +45,12 @@ function ButtonFilter(props) {
               dispatch({
                 type: "SET_FILTER",
                 filter: {
-                  state: item,
+                  state:
+                    props.name === "Raça"
+                      ? item.raca
+                      : props.name === "Idade"
+                      ? `${item.idade} ${item.unidadetempo}`
+                      : `${item.usuario.cidade} ${item.usuario.estado}`,
                   type: props.name,
                 },
               });
@@ -54,7 +59,11 @@ function ButtonFilter(props) {
             }}
             key={i}
           >
-            {item}
+            {props.name === "Raça"
+              ? item.raca
+              : props.name === "Idade"
+              ? `${item.idade} ${item.unidadetempo}`
+              : `${item.usuario.cidade} ${item.usuario.estado}`}
           </p>
         ))}
       </div>
