@@ -81,7 +81,7 @@ function DetailsPet() {
     } | Animal X`;
   }, [pet, petId, filter]);
 
-  var map = `https://www.google.com/maps/place/${pet?.cidade} ${pet?.estado}`;
+  var map = `https://www.google.com/maps/place/${pet?.usuario?.cidade} ${pet?.usuario?.estado}`;
 
   var urlWEB = `https://animal--x.web.app/pet/${pet?.id}`;
 
