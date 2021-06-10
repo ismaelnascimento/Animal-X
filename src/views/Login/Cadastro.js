@@ -33,68 +33,69 @@ function Cadastro() {
   const cadastro = async (e) => {
     e.preventDefault();
 
-    if (upload) {
-      var user;
-      const headers = {
-        "Content-Type": "application/json;charset=utf-8",
-        "Access-Control-Allow-Origin": "*",
-      };
+    var user;
+    const headers = {
+      "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+    };
 
-      await fetch(
-        "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          user = {
-            img_view: upload ? uploadView : UserNull,
-            cidade: data?.city,
-            img_file: upload ? upload : null,
-            email: email,
-            estado: data?.state,
-            nome: name,
-            senha: senha,
-            whatsapp: whatsapp,
-          };
-        });
-      const resp = await api.post("usuario/salvar", user, headers);
-      const dataLogin = {
-        email: email,
-        password: senha,
-      };
-      let respLogin = await api.post("auth", dataLogin);
-      localStorage.setItem("TOKEN", respLogin.data.token);
-      localStorage.setItem("ID_USUARIO_LOGADO", respLogin.data.usuario.id);
-      uploadImage();
-
-      await fetch(
-        "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          user = {
-            img_view:
-              "https://photoanimalx.s3.us-east-2.amazonaws.com/" +
-              respLogin.data.usuario.img_login,
-            tipo_usuario: respLogin.data.usuario.tipo_usuario,
-            img_file: upload ? upload : null,
-            cidade: data?.city,
-            email: email,
-            estado: data?.state,
-            nome: name,
-            senha: senha,
-            whatsapp: whatsapp,
-          };
-        });
-
-      // handleCadastro
-      dispatch({
-        type: "SET_USER",
-        user: user,
+    await fetch(
+      "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        user = {
+          img_view: uploadView,
+          cidade: data?.city,
+          img_file: upload ? upload : null,
+          email: email,
+          estado: data?.state,
+          nome: name,
+          senha: senha,
+          whatsapp: whatsapp,
+        };
       });
 
-      history.push("/");
-      document.title = "Animal X";
-    }
+    const resp = await api.post("usuario/salvar", user, headers);
+    const dataLogin = {
+      email: email,
+      password: senha,
+    };
+    let respLogin = await api.post("auth", dataLogin);
+    localStorage.setItem("TOKEN", respLogin.data.token);
+    localStorage.setItem("ID_USUARIO_LOGADO", respLogin.data.usuario.id);
+    uploadImage();
+
+    await fetch(
+      "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        var img =
+          "https://photoanimalx.s3.us-east-2.amazonaws.com/" +
+          respLogin.data.usuario.img_login;
+
+        user = {
+          img_view: uploadView,
+          tipo_usuario: respLogin.data.usuario.tipo_usuario,
+          img_file: upload ? upload : null,
+          cidade: data?.city,
+          email: email,
+          estado: data?.state,
+          nome: name,
+          senha: senha,
+          whatsapp: whatsapp,
+        };
+      });
+    uploadImage();
+
+    dispatch({
+      type: "SET_USER",
+      user: user,
+    });
+
+    history.push("/");
+    document.title = "Animal X";
   };
 
   async function uploadImage() {
@@ -104,7 +105,7 @@ function Cadastro() {
       var config = {
         headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
       };
-      
+
       await api.post(
         `usuario/uploadFotoPerfil/${localStorage.getItem("ID_USUARIO_LOGADO")}`,
         dataUpload,
@@ -331,9 +332,19 @@ function Cadastro() {
           </div>
         </div>
 
-        <button style={{ marginTop: 7 }} onClick={(e) => cadastro(e)}>
-          Cadastrar
-        </button>
+        {upload !== null &&
+        email !== "" &&
+        senha !== "" &&
+        whatsapp !== "" &&
+        name !== "" ? (
+          <button style={{ marginTop: 7 }} onClick={(e) => cadastro(e)}>
+            Cadastrar
+          </button>
+        ) : (
+          <button style={{ marginTop: 7, opacity: "0.5", cursor: "auto" }}>
+            Cadastrar
+          </button>
+        )}
       </div>
     </div>
   );

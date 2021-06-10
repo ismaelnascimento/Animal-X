@@ -7,7 +7,7 @@ import "../../styles/Login/Login.css";
 import Logo from "../../assets/images/Banner/LoginLeft.svg";
 import Pata from "../../assets/images/Complements/IlustratorPata.svg";
 import { useHistory } from "react-router-dom";
-import api from '../../service/service';
+import api from "../../service/service";
 
 function Entrar() {
   const history = useHistory();
@@ -23,8 +23,10 @@ function Entrar() {
       "Access-Control-Allow-Origin": "*",
     };
 
- 
-     const resp = await api.post(`usuario/emailRecuperarSenha/${email}`,headers); 
+    const resp = await api.post(
+      `usuario/emailRecuperarSenha/${email}`,
+      headers
+    );
     // handle RecuperarSenha
     setMensagemView(true);
     setEmail("");
@@ -104,7 +106,11 @@ function Entrar() {
             </div>
           </div>
 
-          <button onClick={(e) => recuperarSenha(e)}>Concluir</button>
+          {email !== "" ? (
+            <button onClick={(e) => recuperarSenha(e)}>Concluir</button>
+          ) : (
+            <button style={{ opacity: "0.5", cursor: "auto" }}>Concluir</button>
+          )}
         </div>
       )}
     </div>

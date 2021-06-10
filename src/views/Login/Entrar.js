@@ -25,28 +25,35 @@ function Entrar() {
       email: email,
       password: senha,
     };
-    let respLogin = await api.post("auth", dataLogin);
-    localStorage.setItem("TOKEN", respLogin.data.token);
-    localStorage.setItem("ID_USUARIO_LOGADO", respLogin.data.usuario.id);
-    let user = {
-      img_view:
-        "https://photoanimalx.s3.us-east-2.amazonaws.com/" +
-        respLogin.data.usuario.img_login,
-      cidade: respLogin.data.usuario.cidade,
-      email: respLogin.data.usuario.email,
-      estado: respLogin.data.usuario.estado,
-      nome: respLogin.data.usuario.nome,
-      whatsapp: respLogin.data.usuario.whatsapp,
-      tipo_usuario: respLogin.data.usuario.tipo_usuario,
-    };
-    console.log(respLogin.data.usuario);
-    // handleCadastro
-    dispatch({
-      type: "SET_USER",
-      user: user,
-    });
-    history.push("/");
-    document.title = "Animal X";
+
+    let respLogin = await api
+      .post("auth", dataLogin)
+      .catch(() => alert("Login não encontrado"));
+
+    if (respLogin?.data) {
+      localStorage.setItem("TOKEN", respLogin?.data?.token);
+      localStorage.setItem("ID_USUARIO_LOGADO", respLogin?.data?.usuario?.id);
+
+      let user = {
+        img_view:
+          "https://photoanimalx.s3.us-east-2.amazonaws.com/" +
+          respLogin?.data?.usuario?.img_login,
+        cidade: respLogin?.data?.usuario?.cidade,
+        email: respLogin?.data?.usuario?.email,
+        estado: respLogin?.data?.usuario?.estado,
+        nome: respLogin?.data?.usuario?.nome,
+        whatsapp: respLogin?.data?.usuario?.whatsapp,
+        tipo_usuario: respLogin?.data?.usuario?.tipo_usuario,
+      };
+      console.log(respLogin?.data?.usuario);
+
+      dispatch({
+        type: "SET_USER",
+        user: user,
+      });
+      history.push("/");
+      document.title = "Animal X";
+    }
   };
 
   const handleEmail = (e) => {
@@ -153,7 +160,11 @@ function Entrar() {
           Recuperar senha
         </a>
 
-        <button onClick={(e) => entrar(e)}>Entrar</button>
+        {email !== "" && senha !== "" ? (
+          <button onClick={(e) => entrar(e)}>Entrar</button>
+        ) : (
+          <button style={{ opacity: "0.5", cursor: "auto" }}>Entrar</button>
+        )}
       </div>
     </div>
   );

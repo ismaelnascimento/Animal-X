@@ -5,7 +5,8 @@ import { CgClose } from "react-icons/cg";
 
 //
 import "../../styles/Pets/CadastroPet.css";
-import api from '../../service/service';
+import api from "../../service/service";
+import { useHistory } from "react-router-dom";
 
 function CadastroPet() {
   const [upload1, setUpload1] = useState(null);
@@ -56,48 +57,54 @@ function CadastroPet() {
   const [peso, setPeso] = useState();
   const [tamanho, setTamanho] = useState("P");
   const [sexo, setSexo] = useState("Feminino");
-  const [id, setId] = useState(0);
+  const history = useHistory();
 
   const addPet = async (e) => {
     e.preventDefault();
+
     let dataPet = {
-        altura:altura,
-        apelido:apelido ,
-        categoria:categoria,
-        descricao:descricao,
-        especie:especie,
-        idade:idade ,
-        peso:peso,
-        raca:raca,
-        sexo:sexo,
-        situacao:"Disponivel",
-        tamanho: tamanho,
-        unidadeTempo:typeIdade, 
-        usuario:localStorage.getItem('ID_USUARIO_LOGADO') 
+      altura: altura,
+      apelido: apelido,
+      categoria: categoria,
+      descricao: descricao,
+      especie: especie,
+      idade: `${idade} ${typeIdade}`,
+      peso: peso,
+      raca: raca,
+      sexo: sexo,
+      situacao: checkedSituacao ? "Disponivel" : "ADOTADO",
+      tamanho: tamanho,
+      unidadeTempo: typeIdade,
+      usuario: localStorage.getItem("ID_USUARIO_LOGADO"),
+    };
+
+    var config = {
+      headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
+    };
+
+    const resp = await api.post("animal/salvar/", dataPet, config);
+    let id = resp.data.id;
+
+    if (upload1) {
+      let dataUpload = new FormData();
+      dataUpload.append("file", upload1, upload1.name);
+      let respFt = await api.post(
+        `foto/upload/storage/${id}`,
+        dataUpload,
+        config
+      );
     }
-    var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN') } };  
-    
-    const resp = await api.post("animal/salvar/",dataPet,config) ; 
-     let id = resp.data.id;
-     
-    if (upload1) { 
-      let dataUpload = new FormData();  
-      dataUpload.append('file',upload1,upload1.name);   
-      let respFt = await api.post(`foto/upload/storage/${id}`,dataUpload,config);  
+    if (upload2) {
+      let dataUpload = new FormData();
+      dataUpload.append("file", upload2, upload2.name);
+      await api.post(`foto/upload/storage/${id}`, dataUpload, config);
     }
-    if (upload2) { 
-      let dataUpload = new FormData();  
-      dataUpload.append('file',upload2,upload2.name);   
-      await api.post(`foto/upload/storage/${id}`,dataUpload,config); 
+    if (upload3) {
+      let dataUpload = new FormData();
+      dataUpload.append("file", upload3, upload3.name);
+      await api.post(`foto/upload/storage/${id}`, dataUpload, config);
     }
-    if (upload3) { 
-      let dataUpload = new FormData();  
-      dataUpload.append('file',upload3,upload3.name);   
-      await api.post(`foto/upload/storage/${id}`,dataUpload,config); 
-    }
- 
-    //console.log(resp);
-    // HANDLE ADICIONAR PET
+
     setUpload1(null);
     setUploadView1("");
     setUpload2(null);
@@ -110,11 +117,12 @@ function CadastroPet() {
     settDescricao("");
     setEspecie("");
     setCategoria("Gatos");
-    setAltura();
-    setTamanho();
-    setIdade();
-    setPeso();
+    setAltura("");
+    setTamanho("");
+    setIdade("");
+    setPeso("");
     setSexo("Feminino");
+    history.push("/");
   };
 
   useEffect(() => {

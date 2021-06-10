@@ -45,17 +45,18 @@ function Perfil() {
       cidade: cidadeUser,
       email: emailUser,
       estado: estadoUser,
-      nome: nameUser, 
+      nome: nameUser,
       whatsapp: whatsappUser,
       id: localStorage.getItem("ID_USUARIO_LOGADO"),
-      senha:senha
+      senha: senha,
     };
-    console.log(data);
+
     var config = {
       headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
-    };  
-    const resp = await api.post("usuario/update", data,config);
-    
+    };
+
+    const resp = await api.post("usuario/update", data, config);
+
     uploadImage();
 
     dispatch({
@@ -71,9 +72,10 @@ function Perfil() {
     if (upload) {
       let dataUpload = new FormData();
       dataUpload.append("file", upload, upload.name);
+
       var config = {
         headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
-      }; 
+      };
       await api.post(
         `usuario/uploadFotoPerfil/${localStorage.getItem("ID_USUARIO_LOGADO")}`,
         dataUpload,
@@ -99,7 +101,14 @@ function Perfil() {
 
           {!upload ? (
             <div className="app-pefil_image">
-              <img src={user?.img_view} alt="" />
+              <img
+                src={
+                  user?.img_view
+                    ? user?.img_view
+                    : "https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1594805258216454~c5_720x720.jpeg?x-expires=1623351600&x-signature=vLqvlvO%2B73%2F3ou%2BMZLqeCTsanD0%3D"
+                }
+                alt=""
+              />
               <label htmlFor="upload-profile-new">
                 <IconEdit />
               </label>

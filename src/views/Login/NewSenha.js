@@ -7,7 +7,7 @@ import "../../styles/Login/Login.css";
 import Logo from "../../assets/images/Banner/LoginLeft.svg";
 import Pata from "../../assets/images/Complements/IlustratorPata.svg";
 import { useHistory } from "react-router-dom";
-import api from '../../service/service';
+import api from "../../service/service";
 import { useLocation } from "react-router-dom";
 
 function useQuery() {
@@ -26,15 +26,16 @@ function NewSenha() {
   const onNewSenha = async (e) => {
     e.preventDefault();
     var url = window.location.href;
-     console.log(id);
-     email = email.replace("target=","").replace("%20target=","")
-     console.log(email);
-     
+    console.log(id);
+    email = email.replace("target=", "").replace("%20target=", "");
+    console.log(email);
+
     let data = {
-      senha : newSenha
-    }
-    const resp = await api.post(`usuario/recuperarSenha/${id}/${email}`,data);
-     
+      senha: newSenha,
+    };
+
+    const resp = await api.post(`usuario/recuperarSenha/${id}/${email}`, data);
+
     setNewSenha("");
     history.push("/entrar");
   };
@@ -97,7 +98,11 @@ function NewSenha() {
           </div>
         </div>
 
-        <button onClick={(e) => onNewSenha(e)}>Concluir</button>
+        {newSenha !== "" ? (
+          <button onClick={(e) => onNewSenha(e)}>Concluir</button>
+        ) : (
+          <button style={{ opacity: "0.5", cursor: "auto" }}>Concluir</button>
+        )}
       </div>
     </div>
   );

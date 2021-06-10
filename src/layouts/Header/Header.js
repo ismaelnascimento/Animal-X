@@ -115,7 +115,14 @@ function Header() {
               onClick={() => setModalUser(true)}
               className="animalX--header__right-user"
             >
-              <img src={user?.img_view} alt="" />
+              <img
+                src={
+                  user?.img_view
+                    ? user?.img_view
+                    : "https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1594805258216454~c5_720x720.jpeg?x-expires=1623351600&x-signature=vLqvlvO%2B73%2F3ou%2BMZLqeCTsanD0%3D"
+                }
+                alt=""
+              />
               <IconArrow />
             </div>
           )}
@@ -144,7 +151,14 @@ function Header() {
             onClick={() => history.push("/perfil")}
             className="animalX--modal-user__infos"
           >
-            <img src={user?.img_view} alt="" />
+            <img
+              src={
+                user?.img_view
+                  ? user?.img_view
+                  : "https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1594805258216454~c5_720x720.jpeg?x-expires=1623351600&x-signature=vLqvlvO%2B73%2F3ou%2BMZLqeCTsanD0%3D"
+              }
+              alt=""
+            />
             <p>{user?.nome}</p>
             <h5>{user?.email}</h5>
           </div>

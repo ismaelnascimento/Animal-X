@@ -6,7 +6,7 @@ import { useHistory, useLocation } from "react-router-dom";
 
 //
 import WhatsApp from "../../assets/icons/WhatsApp";
-import api from '../../service/service';
+import api from "../../service/service";
 //
 import "../../styles/Modal/Modal.css";
 
@@ -100,7 +100,7 @@ const BackLeft = ({ ...res }) => (
       stroke-linejoin="round"
     />
   </svg>
-); 
+);
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
     const listener = (event) => {
@@ -140,14 +140,15 @@ function CardPet(props) {
   const [situacao, setSituacao] = useState(props.situacao);
 
   const updateSituacao = async (situacaoUpdate) => {
-  
-    setSituacao(situacaoUpdate); 
-     
-    var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN') } };  
-       console.log(props.situacao);
-      const resp = await api.put(`animal/adotar/${props.id}`,config) ; 
-   
-      console.log(resp);
+    setSituacao(situacaoUpdate);
+
+    var config = {
+      headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
+    };
+
+    const resp = await api.put(`animal/adotar/${props.id}`, config);
+
+    console.log(resp);
   };
 
   const BottomSituacao = () => (
@@ -156,11 +157,11 @@ function CardPet(props) {
         style={{
           color: situacao === "ADOTADO" ? "#fff" : "",
           background:
-            situacao === "ADOTADO" 
+            situacao === "ADOTADO"
               ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
               : "",
         }}
-        onClick={() => updateSituacao("Adotado")}
+        onClick={() => updateSituacao("ADOTADO")}
       >
         Adotado
       </button>
@@ -268,7 +269,11 @@ function CardPet(props) {
 
             {!props?.meus ? (
               <div className="animalX--card__pet-content-infos__description">
-                <p>{props.descricao}</p>
+                <p>
+                  {props.descricao?.length < 65
+                    ? props.descricao
+                    : props.descricao?.substring(0, 65) + "..."}
+                </p>
               </div>
             ) : (
               ""

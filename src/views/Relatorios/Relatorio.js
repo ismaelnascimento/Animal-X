@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 //
 import "../../styles/Relatorios.css";
@@ -13,16 +13,17 @@ function Relatorio() {
     var config = {
       headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
     };
-    let resp = await api.get( `usuario/relatorio/`,config);
-     
+    let resp = await api.get(`usuario/relatorio/`, config);
+
     setUsersCadastrados(resp.data.qtdUsuariosCadastrados);
     setPetsCadastrados(resp.data.qtdAnimaisCadastrados);
     setUsersAdotados(resp.data.qtdAnimaisAdotados);
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     getRelatorio();
-  },[])
+  }, []);
+  
   return (
     <div className="app-relatorio">
       <p>Relatorios</p>

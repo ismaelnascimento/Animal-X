@@ -13,6 +13,22 @@
   margin-bottom: 95px;
 }
 
+.notItem {
+  font-size: 17px;
+  font-weight: 500;
+  color: #394247;
+}
+
+.notItem > a {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--color-primary);
+}
+
+.notItem > a:hover {
+  opacity: 0.7;
+}
+
 @keyframes loading {
   0% {
     transform: rotate(0deg);
