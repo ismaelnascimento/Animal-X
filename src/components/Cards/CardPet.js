@@ -9,7 +9,7 @@ import WhatsApp from "../../assets/icons/WhatsApp";
 
 //
 import "../../styles/Modal/Modal.css";
-
+import api from '../../service/service';
 const Feminino = () => (
   <svg
     width="10"
@@ -138,10 +138,13 @@ function CardPet(props) {
   var whatsapp = `https://api.whatsapp.com/send?text=Ola vim do *Animal X* (${urlWEB}), eu encontrei um _${props.especie}_ chamado *${props.apelido}*`;
   var twitter = `https://twitter.com/intent/tweet?url=${urlWEB}&text=Ola vim do Animal X, eu encontrei um ${props.especie} chamado ${props.apelido}`;
 
-  const updateSituacao = (situacaoUpdate) => {
-    // HANDLE UPDATE SITUAÇÃO // situacaoUpdate
+  const updateSituacao = async (situacaoUpdate,id) => {
+      var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN')}};
+      console.log("TOKE",config); 
+    const xresp =   await api.post(`animal/adotar/${id}`,config); 
+    console.log(xresp);
   };
-
+   
   const BottomSituacao = () => (
     <div className="animalX--card__situacao">
       <button
@@ -152,7 +155,7 @@ function CardPet(props) {
               ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
               : "",
         }}
-        onClick={() => updateSituacao("Adotado")}
+        onClick={() => updateSituacao("Adotado",props.id)}
       >
         Adotado
       </button>

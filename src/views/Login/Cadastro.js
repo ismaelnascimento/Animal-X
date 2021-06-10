@@ -64,18 +64,15 @@ function Cadastro() {
         localStorage.setItem('TOKEN', respLogin.data.token);
         localStorage.setItem("ID_USUARIO_LOGADO",respLogin.data.usuario.id); 
         uploadImage();
-         user = { 
-          img_view: "https://photoanimalx.s3.us-east-2.amazonaws.com/"+respLogin.data.usuario.img_login, 
-          tipo_usuario:respLogin.data.usuario.tipo_usuario
-        }  
-          // handleCadastro
+         user.img_view= "https://photoanimalx.s3.us-east-2.amazonaws.com/"+respLogin.data.usuario.img_login;
+         user.tipo_usuario = respLogin.data.usuario.tipo_usuario;
+         
+          console.log(user);
           dispatch({
             type: "SET_USER",
             user: user,
           });
-  
-          history.push("/");
-         
+          history.push("/"); 
   }; 
   async function uploadImage(){ 
     if (upload) { 

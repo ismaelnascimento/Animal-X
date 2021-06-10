@@ -48,7 +48,7 @@ function Content() {
 
   useEffect(() => {
     data();
-  });
+  },[]);
 
   const filterPets = useMemo(() => {
     if (searchPets === "" && filter === "") {
