@@ -39,16 +39,22 @@ function Content() {
   const [getPets, setGetPets] = useState();
   const [{ filter }] = useStateValue();
   const [notPets, setNotPets] = useState(false);
-
-  async function data() {
-    const resp = await api.get("animal/animaisAdocao?pageSize=1000");
-    setNotPets(false);
-    setGetPets(resp.data.content);
-  }
+  const [total, setTotal] = useState(0);
+  const [currentPage, setCurrentPage] = useState(0);
 
   useEffect(() => {
+    async function data() {
+      const response = await api.get(
+        `/animal/animaisAdocao?page=${currentPage}`
+      );
+      setTotal(response.data.totalPages);
+      setNotPets(false);
+      console.log(response.data);
+      setGetPets(response.data.content);
+    }
+
     data();
-  });
+  }, [currentPage]);
 
   const filterPets = useMemo(() => {
     if (searchPets === "" && filter === "") {
@@ -96,7 +102,7 @@ function Content() {
   }, [filterPets, pets, notPets]);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <div className="animalX--content">
         {filterPets?.length > 0 ? (
           filterPets?.map((pet, i) => (
@@ -133,6 +139,36 @@ function Content() {
           <div className="lds-ellipsis"></div>
         )}
       </div>
+
+      <div
+        style={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+          width: "100%",
+          justifyContent: "center",
+        }}
+      >
+        <button
+          className="animal-x--button"
+          style={{ opacity: currentPage === 0 ? "0.5" : "" }}
+          onClick={() =>
+            setCurrentPage(currentPage === 0 ? 0 : currentPage - 1)
+          }
+        >
+          Página anterior
+        </button>
+        <button
+          className="animal-x--button"
+          style={{ opacity: currentPage >= total - 1 ? "0.5" : "" }}
+          onClick={() =>
+            setCurrentPage(currentPage >= total - 1 ? 0 : currentPage + 1)
+          }
+        >
+          Proxima página
+        </button>
+      </div>
+
       <img
         className="animalX--content__pata"
         src={Pata}
