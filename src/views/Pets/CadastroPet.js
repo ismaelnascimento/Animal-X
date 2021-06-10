@@ -57,8 +57,6 @@ function CadastroPet() {
   const [peso, setPeso] = useState();
   const [tamanho, setTamanho] = useState("P");
   const [sexo, setSexo] = useState("Feminino");
-  const [cidade, setCidade] = useState("");
-  const [estado, setEstado] = useState("");
 
   const history = useHistory();
 
@@ -75,8 +73,6 @@ function CadastroPet() {
       peso: peso,
       raca: raca,
       sexo: sexo,
-      estado: estado,
-      cidade: cidade,
       situacao: checkedSituacao ? "Disponivel" : "ADOTADO",
       tamanho: tamanho,
       unidadeTempo: typeIdade,
@@ -127,8 +123,6 @@ function CadastroPet() {
     setIdade("");
     setPeso("");
     setSexo("Feminino");
-    setCidade("");
-    setEstado("");
     history.push("/");
   };
 
@@ -285,26 +279,6 @@ function CadastroPet() {
             </div>
 
             <div className="app-cadastro-pet__content-items__inputs-input">
-              <p>Estado</p>
-              <input
-                onChange={(e) => setEstado(e.target.value)}
-                value={estado}
-                type="text"
-                placeholder="Estado (localização) do seu pet ex: Ceará"
-              />
-            </div>
-
-            <div className="app-cadastro-pet__content-items__inputs-input">
-              <p>Cidade</p>
-              <input
-                onChange={(e) => setCidade(e.target.value)}
-                value={cidade}
-                type="text"
-                placeholder="Cidade (localização) do seu pet ex: Horizonte"
-              />
-            </div>
-
-            <div className="app-cadastro-pet__content-items__inputs-input">
               <p>Categoria</p>
 
               <section>
@@ -434,9 +408,7 @@ function CadastroPet() {
           altura !== null &&
           idade !== undefined &&
           peso !== undefined &&
-          peso !== null &&
-          cidade !== "" &&
-          estado !== "" ? (
+          peso !== null ? (
             <button onClick={(e) => addPet(e)}>Adicionar</button>
           ) : (
             <button style={{ opacity: "0.5", cursor: "auto" }}>

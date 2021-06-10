@@ -62,8 +62,10 @@ function Cadastro() {
       password: senha,
     };
     let respLogin = await api.post("auth", dataLogin);
+
     localStorage.setItem("TOKEN", respLogin.data.token);
     localStorage.setItem("ID_USUARIO_LOGADO", respLogin.data.usuario.id);
+
     uploadImage();
 
     await fetch(
@@ -71,10 +73,6 @@ function Cadastro() {
     )
       .then((response) => response.json())
       .then((data) => {
-        var img =
-          "https://photoanimalx.s3.us-east-2.amazonaws.com/" +
-          respLogin.data.usuario.img_login;
-
         user = {
           img_view: uploadView,
           tipo_usuario: respLogin.data.usuario.tipo_usuario,
@@ -87,6 +85,7 @@ function Cadastro() {
           whatsapp: whatsapp,
         };
       });
+
     uploadImage();
 
     dispatch({

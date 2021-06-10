@@ -39,6 +39,7 @@ function Entrar() {
           "https://photoanimalx.s3.us-east-2.amazonaws.com/" +
           respLogin?.data?.usuario?.img_login,
         cidade: respLogin?.data?.usuario?.cidade,
+        senha: respLogin?.data?.usuario?.senha,
         email: respLogin?.data?.usuario?.email,
         estado: respLogin?.data?.usuario?.estado,
         nome: respLogin?.data?.usuario?.nome,
