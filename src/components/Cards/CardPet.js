@@ -100,8 +100,7 @@ const BackLeft = ({ ...res }) => (
       stroke-linejoin="round"
     />
   </svg>
-);
-
+); 
 function useOnClickOutside(ref, handler) {
   useEffect(() => {
     const listener = (event) => {
@@ -143,16 +142,12 @@ function CardPet(props) {
   const updateSituacao = async (situacaoUpdate) => {
   
     setSituacao(situacaoUpdate); 
-    console.log(localStorage.getItem('TOKEN'));
-    const headers = {
-      "Content-Type": "application/json;charset=utf-8",
-      "Access-Control-Allow-Origin": "*",
-    };
+     
     var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN') } };  
-    
-     const resp = await api.post(`animal/adotar/${36}`,config) ; 
+       console.log(props.situacao);
+      const resp = await api.put(`animal/adotar/${props.id}`,config) ; 
    
-     console.log(resp);
+      console.log(resp);
   };
 
   const BottomSituacao = () => (
@@ -161,11 +156,11 @@ function CardPet(props) {
         style={{
           color: situacao === "ADOTADO" ? "#fff" : "",
           background:
-            situacao === "ADOTADO"
+            situacao === "ADOTADO" 
               ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
               : "",
         }}
-        onClick={() => updateSituacao("ADOTADO")}
+        onClick={() => updateSituacao("Adotado")}
       >
         Adotado
       </button>

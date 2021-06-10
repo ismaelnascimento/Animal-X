@@ -15,7 +15,7 @@ function MeusPets() {
     setMeusPets(resp.data.content);
     console.log(resp);
   }
-
+  
   useEffect(() => {
     data();
     document.title = "Meus amiguinhos | Animal X";
@@ -54,6 +54,12 @@ function MeusPets() {
               situacao={pet.situacao}
               especie={pet.especie}
               peso={pet.peso}
+              altura={pet.alura}
+              usuario={pet.usuario.id}
+              unidadetempo={pet.unidadetempo}
+              id={pet.id}
+
+              
             />
           ))}
         </div>

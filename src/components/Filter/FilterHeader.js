@@ -46,7 +46,7 @@ function FilterHeader() {
   const [categorys, setCategorys] = useState([
     "Gatos",
     "Cachorros",
-    "Outros Pets",
+    "Outros",
   ]);
 
   const searchSubmit = (e) => {

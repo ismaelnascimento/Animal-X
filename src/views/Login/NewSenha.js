@@ -27,6 +27,7 @@ function NewSenha() {
     e.preventDefault();
     var url = window.location.href;
      console.log(id);
+     email = email.replace("target=","").replace("%20target=","")
      console.log(email);
      
     let data = {
