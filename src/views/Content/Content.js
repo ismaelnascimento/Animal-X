@@ -106,9 +106,10 @@ function Content() {
                   : `https://photoanimalx.s3.us-east-2.amazonaws.com/${pet.fotos[0].nome}`
               }
               apelido={pet.apelido}
-              cidade={pet.cidade}
+              cidade={pet.usuario.cidade}
               idade={pet.idade}
-              estado={pet.estado}
+              estado={pet.usuario.estado}
+              usuario={pet.usuario.id}
               descricao={pet.descricao}
               whatsapp={pet.usuario.whatsapp}
               tamanho={pet.tamanho}

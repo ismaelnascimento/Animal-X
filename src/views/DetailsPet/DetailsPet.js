@@ -182,7 +182,7 @@ function DetailsPet() {
           <div>
             <IconLocal />
             <p>
-              {pet?.cidade} {pet?.estado}
+              {pet?.usuario?.cidade} {pet?.usuario?.estado}
             </p>
           </div>
           <div>

@@ -30,6 +30,33 @@
   transition: all 0.3s ease;
 }
 
+.animalX--card__pet > svg {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border-radius: 18px;
+  background-color: #26262928;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 9px;
+  transition: all 0.3s ease;
+  z-index: 999;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  backdrop-filter: blur(3px);
+}
+
+.animalX--card__pet > svg:hover {
+  background-color: rgba(37, 37, 41, 0.295);
+}
+
+.animalX--card__pet > svg path {
+  fill: #fff;
+}
+
 .animalX--card__pet:hover {
   transform: scale(1.1);
   box-shadow: 1px 2px 15px 2px rgba(0, 0, 0, 0.25);
@@ -50,7 +77,7 @@
 }
 
 .animalX--card__pet-image > img:hover {
-  opacity: 0.7;
+  opacity: 0.9;
 }
 
 .animalX--card__pet-content {

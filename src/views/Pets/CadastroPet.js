@@ -434,7 +434,9 @@ function CadastroPet() {
           altura !== null &&
           idade !== undefined &&
           peso !== undefined &&
-          peso !== null ? (
+          peso !== null &&
+          cidade !== "" &&
+          estado !== "" ? (
             <button onClick={(e) => addPet(e)}>Adicionar</button>
           ) : (
             <button style={{ opacity: "0.5", cursor: "auto" }}>
