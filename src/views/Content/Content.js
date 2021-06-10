@@ -41,7 +41,7 @@ function Content() {
   const [notPets, setNotPets] = useState(false);
 
   async function data() {
-    const resp = await api.get("animal/animaisAdocao");
+    const resp = await api.get("animal/animaisAdocao?pageSize=1000");
     setNotPets(false);
     setGetPets(resp.data.content);
   }
