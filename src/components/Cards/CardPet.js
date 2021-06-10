@@ -9,7 +9,7 @@ import WhatsApp from "../../assets/icons/WhatsApp";
 
 //
 import "../../styles/Modal/Modal.css";
-import api from '../../service/service';
+
 const Feminino = () => (
   <svg
     width="10"
@@ -138,32 +138,36 @@ function CardPet(props) {
   var whatsapp = `https://api.whatsapp.com/send?text=Ola vim do *Animal X* (${urlWEB}), eu encontrei um _${props.especie}_ chamado *${props.apelido}*`;
   var twitter = `https://twitter.com/intent/tweet?url=${urlWEB}&text=Ola vim do Animal X, eu encontrei um ${props.especie} chamado ${props.apelido}`;
 
-  const updateSituacao = async (situacaoUpdate,id) => {
-      var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN')}};
-      console.log("TOKE",config); 
-    const xresp =   await api.post(`animal/adotar/${id}`,config); 
-    console.log(xresp);
+  const [situacao, setSituacao] = useState(props.situacao);
+
+  const updateSituacao = (situacaoUpdate) => {
+    // HANDLE UPDATE SITUAÇÃO // situacaoUpdate
+    setSituacao(situacaoUpdate);
+
+    // .then(() => {
+    //   setSituacao(props.situacao);
+    // });
   };
-   
+
   const BottomSituacao = () => (
     <div className="animalX--card__situacao">
       <button
         style={{
-          color: props.situacao === "Adotado" ? "#fff" : "",
+          color: situacao === "Adotado" ? "#fff" : "",
           background:
-            props.situacao === "Adotado"
+            situacao === "Adotado"
               ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
               : "",
         }}
-        onClick={() => updateSituacao("Adotado",props.id)}
+        onClick={() => updateSituacao("Adotado")}
       >
         Adotado
       </button>
       <button
         style={{
-          color: props.situacao === "Disponivel" ? "#fff" : "",
+          color: situacao === "Disponivel" ? "#fff" : "",
           background:
-            props.situacao === "Disponivel"
+            situacao === "Disponivel"
               ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
               : "",
         }}
@@ -176,7 +180,7 @@ function CardPet(props) {
 
   return (
     <div>
-      <di
+      <div
         style={{
           opacity: modalShare ? "5" : "0",
           visibility: modalShare ? "visible" : "hidden",
@@ -216,7 +220,7 @@ function CardPet(props) {
             </div>
           </div>
         </div>
-      </di>
+      </div>
 
       <div className="animalX--card__pet">
         <div

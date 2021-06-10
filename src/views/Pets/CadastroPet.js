@@ -5,8 +5,6 @@ import { CgClose } from "react-icons/cg";
 
 //
 import "../../styles/Pets/CadastroPet.css";
-import api from '../../service/service';
-
 
 function CadastroPet() {
   const [upload1, setUpload1] = useState(null);
@@ -57,49 +55,10 @@ function CadastroPet() {
   const [peso, setPeso] = useState();
   const [tamanho, setTamanho] = useState("P");
   const [sexo, setSexo] = useState("Feminino");
-  const [id, setId] = useState(0);
 
-  const addPet = async (e) => {
+  const addPet = (e) => {
     e.preventDefault();
-    let dataPet = {
-        altura:altura,
-        apelido:apelido ,
-        categoria:categoria,
-        descricao:descricao,
-        especie:especie,
-        idade:idade ,
-        peso:peso,
-        raca:raca,
-        sexo:sexo,
-        situacao:"Disponivel",
-        tamanho: tamanho,
-        unidadeTempo:typeIdade, 
-        usuario:localStorage.getItem('ID_USUARIO_LOGADO') 
-    }
-    var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN') } };  
-    console.log(config); 
-    const resp = await api.post("animal/salvar/",dataPet,config); 
-    setId(resp.data.id);
-    console.log(id);
-     
-    if (upload1) { 
-      let dataUpload = new FormData();  
-      dataUpload.append('file',upload1,upload1.name);   
-      let respFt = await api.post(`foto/upload/storage/${id}`,dataUpload,config); 
-      
-    }
-    if (upload2) { 
-      let dataUpload = new FormData();  
-      dataUpload.append('file',upload2,upload2.name);   
-      await api.post(`foto/upload/storage/${id}`,dataUpload,config); 
-    }
-    if (upload3) { 
-      let dataUpload = new FormData();  
-      dataUpload.append('file',upload3,upload3.name);   
-      await api.post(`foto/upload/storage/${id}`,dataUpload,config); 
-    }
- 
-    //console.log(resp);
+
     // HANDLE ADICIONAR PET
     setUpload1(null);
     setUploadView1("");
@@ -119,6 +78,10 @@ function CadastroPet() {
     setPeso();
     setSexo("Feminino");
   };
+
+  useEffect(() => {
+    document.title = "Cadastro de seu amiguinho | Animal X";
+  }, []);
 
   return (
     <div className="app-cadastro-pet">
@@ -290,7 +253,7 @@ function CadastroPet() {
                 onChange={(e) => setAltura(e.target.value)}
                 value={altura}
                 type="number"
-                placeholder="Altura do seu pet"
+                placeholder="Altura do seu pet em cm"
               />
             </div>
 
@@ -305,13 +268,13 @@ function CadastroPet() {
                 }}
               >
                 <input
-                  style={{ margin: "4px", flex: '1' }}
+                  style={{ margin: "4px", flex: "1" }}
                   onChange={(e) => setIdade(e.target.value)}
                   value={idade}
                   type="text"
                   placeholder="Idade do seu pet"
                 />
-                <section style={{ margin: "4px", flex: '1' }}>
+                <section style={{ margin: "4px", flex: "1" }}>
                   <select
                     onChange={(e) => setTypeIdade(e.target.value)}
                     value={typeIdade}

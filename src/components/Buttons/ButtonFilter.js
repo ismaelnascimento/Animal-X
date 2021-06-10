@@ -50,6 +50,7 @@ function ButtonFilter(props) {
                 },
               });
               history.push("/");
+              document.title = "Animal X";
             }}
             key={i}
           >

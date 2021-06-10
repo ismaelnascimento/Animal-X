@@ -1,13 +1,12 @@
-import React, { useState,useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 //
 import "../../styles/Pets/MeusPets.css";
 
 //
 import CardPet from "../../components/Cards/CardPet";
-import api from '../../service/service';
+
 function MeusPets() {
-  
   const [meusPets, setMeusPets] = useState([
     {
       id: 1,
@@ -304,18 +303,11 @@ function MeusPets() {
       ],
     },
   ]);
-
-  async function data() {
-    var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN') } };   
-    const resp = await api.get("animal/animaisUsuario/7",config); 
-    setMeusPets(resp.data.content);
-    console.log(resp);
-  }
-
+  
   useEffect(() => {
-    data();
-  },[]);
-   
+    document.title = "Meus amiguinhos | Animal X";
+  }, []);
+
   return (
     <div className="app-cadastro-pet">
       <div className="app-cadastro-pet__back">

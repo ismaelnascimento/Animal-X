@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 
 //
 import "../../styles/Login/Login.css";
@@ -8,36 +8,43 @@ import Logo from "../../assets/images/Banner/LoginLeft.svg";
 import Pata from "../../assets/images/Complements/IlustratorPata.svg";
 import { useHistory } from "react-router-dom";
 
-function Entrar() {
+import { useLocation } from "react-router-dom";
+
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+function NewSenha() {
+  let query = useQuery();
+  var id = query.get("id");
+  var email = query.get("email");
+
   const history = useHistory();
 
-  const [email, setEmail] = useState("");
-  const [mensagemView, setMensagemView] = useState("");
-  const [codigo, setCodigo] = useState("");
+  const [newSenha, setNewSenha] = useState("");
 
-  const recuperarSenha = (e) => {
+  const onNewSenha = (e) => {
     e.preventDefault();
 
-    // handle RecuperarSenha
-    setMensagemView(true);
-    setEmail("");
+    // handle onNewSenha
+    setNewSenha("");
   };
 
-  const handleEmail = (e) => {
-    if (email !== "") {
+  const handleNewSenha = (e) => {
+    if (newSenha !== "") {
       if (e.key === "Enter") {
-        recuperarSenha(e);
+        onNewSenha(e);
       }
     }
   };
 
   useEffect(() => {
-    document.title = "Recuperar senha | Animal X";
+    document.title = "Nova senha | Animal X";
   }, []);
 
   return (
     <div className="animalX--login">
-      <IconBack onClick={() => history.push("/entrar")} />
+      <IconBack onClick={() => history.goBack()} />
 
       <div className="animalX--login-left">
         <img className="animalX--login-left__pata" src={Pata} alt="" />
@@ -59,52 +66,35 @@ function Entrar() {
         </section>
       </div>
 
-      {mensagemView ? (
-        <div className="animalX--login-right">
-          <PataAzulTop className="animalX--login-right__pata-top" />
-          <PataAzulBottom className="animalX--login-right__pata-bottom" />
+      <div className="animalX--login-right">
+        <PataAzulTop className="animalX--login-right__pata-top" />
+        <PataAzulBottom className="animalX--login-right__pata-bottom" />
 
-          <p>Verifique seu email</p>
+        <p>Nova Senha</p>
 
-          <h5 style={{ margin: "30px" }}>
-            Foi enviado um link de recuperação de senha no seu e-mail...
-          </h5>
-
-          <button onClick={() => window.open("https://mail.google.com/")}>
-            Ok
-          </button>
-        </div>
-      ) : (
-        <div className="animalX--login-right">
-          <PataAzulTop className="animalX--login-right__pata-top" />
-          <PataAzulBottom className="animalX--login-right__pata-bottom" />
-
-          <p>Recuperar senha</p>
-
-          <div className="animalX--login__input-form">
-            <p>E-mail</p>
-            <div>
-              <IconEmail />
-              <input
-                style={{ marginRight: "12px" }}
-                autoComplete="new-password"
-                placeholder="Escreva seu email de recuperação"
-                type="text"
-                value={email}
-                onKeyUp={(e) => handleEmail(e)}
-                onChange={(e) => setEmail(e.target.value)}
-              />
-            </div>
+        <div className="animalX--login__input-form">
+          <p>Senha</p>
+          <div>
+            <IconSenha />
+            <input
+              style={{ marginRight: "12px" }}
+              autoComplete="new-password"
+              placeholder="Escreva sua nova senha"
+              type="password"
+              value={newSenha}
+              onKeyUp={(e) => handleNewSenha(e)}
+              onChange={(e) => setNewSenha(e.target.value)}
+            />
           </div>
-
-          <button onClick={(e) => recuperarSenha(e)}>Concluir</button>
         </div>
-      )}
+
+        <button onClick={(e) => onNewSenha(e)}>Concluir</button>
+      </div>
     </div>
   );
 }
 
-export default Entrar;
+export default NewSenha;
 
 const PataAzulTop = ({ ...res }) => (
   <svg
@@ -180,7 +170,7 @@ const PataAzulBottom = ({ ...res }) => (
   </svg>
 );
 
-const IconEmail = () => (
+const IconSenha = () => (
   <svg
     width="24"
     height="24"
@@ -189,12 +179,14 @@ const IconEmail = () => (
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
-      opacity="0.4"
-      d="M22 15.9402C22 18.7302 19.76 20.9902 16.97 21.0002H16.96H7.05C4.27 21.0002 2 18.7502 2 15.9602V15.9502C2 15.9502 2.006 11.5242 2.014 9.29821C2.015 8.88021 2.495 8.64621 2.822 8.90621C5.198 10.7912 9.447 14.2282 9.5 14.2732C10.21 14.8422 11.11 15.1632 12.03 15.1632C12.95 15.1632 13.85 14.8422 14.56 14.2622C14.613 14.2272 18.767 10.8932 21.179 8.97721C21.507 8.71621 21.989 8.95021 21.99 9.36721C22 11.5762 22 15.9402 22 15.9402Z"
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M7.7688 8.71384H16.2312C18.5886 8.71384 20.5 10.583 20.5 12.8885V17.8253C20.5 20.1308 18.5886 22 16.2312 22H7.7688C5.41136 22 3.5 20.1308 3.5 17.8253V12.8885C3.5 10.583 5.41136 8.71384 7.7688 8.71384ZM11.9949 17.3295C12.4928 17.3295 12.8891 16.9419 12.8891 16.455V14.2489C12.8891 13.7719 12.4928 13.3844 11.9949 13.3844C11.5072 13.3844 11.1109 13.7719 11.1109 14.2489V16.455C11.1109 16.9419 11.5072 17.3295 11.9949 17.3295Z"
       fill="#130F26"
     ></path>
     <path
-      d="M21.4761 5.6736C20.6101 4.0416 18.9061 2.9996 17.0301 2.9996H7.05013C5.17413 2.9996 3.47013 4.0416 2.60413 5.6736C2.41013 6.0386 2.50213 6.4936 2.82513 6.7516L10.2501 12.6906C10.7701 13.1106 11.4001 13.3196 12.0301 13.3196C12.0341 13.3196 12.0371 13.3196 12.0401 13.3196C12.0431 13.3196 12.0471 13.3196 12.0501 13.3196C12.6801 13.3196 13.3101 13.1106 13.8301 12.6906L21.2551 6.7516C21.5781 6.4936 21.6701 6.0386 21.4761 5.6736Z"
+      opacity="0.4"
+      d="M17.5228 7.39595V8.86667C17.1672 8.7673 16.7912 8.71761 16.4051 8.71761H15.7446V7.39595C15.7446 5.37868 14.068 3.73903 12.0052 3.73903C9.94245 3.73903 8.26582 5.36874 8.25566 7.37608V8.71761H7.60533C7.20904 8.71761 6.83307 8.7673 6.47742 8.87661V7.39595C6.48758 4.41476 8.9568 2 11.9849 2C15.0536 2 17.5228 4.41476 17.5228 7.39595Z"
       fill="#130F26"
     ></path>
   </svg>
