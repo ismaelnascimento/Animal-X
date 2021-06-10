@@ -44,6 +44,7 @@ function Entrar() {
         estado: respLogin?.data?.usuario?.estado,
         nome: respLogin?.data?.usuario?.nome,
         whatsapp: respLogin?.data?.usuario?.whatsapp,
+        id: respLogin?.data?.usuario?.id,
         tipo_usuario: respLogin?.data?.usuario?.tipo_usuario,
       };
       console.log(respLogin?.data?.usuario);

@@ -74,6 +74,7 @@ function Cadastro() {
       nome: name,
       senha: senha,
       whatsapp: whatsapp,
+      id: respLogin?.data?.usuario?.id,
     };
 
     uploadImage();
