@@ -7,7 +7,7 @@ import "../../styles/Login/Login.css";
 import Logo from "../../assets/images/Banner/LoginLeft.svg";
 import Pata from "../../assets/images/Complements/IlustratorPata.svg";
 import { useHistory } from "react-router-dom";
-
+import api from '../../service/service';
 import { useLocation } from "react-router-dom";
 
 function useQuery() {
@@ -23,11 +23,19 @@ function NewSenha() {
 
   const [newSenha, setNewSenha] = useState("");
 
-  const onNewSenha = (e) => {
+  const onNewSenha = async (e) => {
     e.preventDefault();
-
-    // handle onNewSenha
+    var url = window.location.href;
+     console.log(id);
+     console.log(email);
+     
+    let data = {
+      senha : newSenha
+    }
+    const resp = await api.post(`usuario/recuperarSenha/${id}/${email}`,data);
+     
     setNewSenha("");
+    history.push("/entrar");
   };
 
   const handleNewSenha = (e) => {

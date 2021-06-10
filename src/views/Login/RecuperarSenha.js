@@ -7,6 +7,7 @@ import "../../styles/Login/Login.css";
 import Logo from "../../assets/images/Banner/LoginLeft.svg";
 import Pata from "../../assets/images/Complements/IlustratorPata.svg";
 import { useHistory } from "react-router-dom";
+import api from '../../service/service';
 
 function Entrar() {
   const history = useHistory();
@@ -15,9 +16,15 @@ function Entrar() {
   const [mensagemView, setMensagemView] = useState("");
   const [codigo, setCodigo] = useState("");
 
-  const recuperarSenha = (e) => {
+  const recuperarSenha = async (e) => {
     e.preventDefault();
+    const headers = {
+      "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+    };
 
+ 
+     const resp = await api.post(`usuario/emailRecuperarSenha/${email}`,headers); 
     // handle RecuperarSenha
     setMensagemView(true);
     setEmail("");

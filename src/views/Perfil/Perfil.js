@@ -3,7 +3,7 @@ import { useStateValue } from "../../providers/StateProvider";
 
 //
 import "../../styles/Perfil/Perfil.css";
-
+import api from "../../service/service";
 //
 import { CgClose } from "react-icons/cg";
 
@@ -16,6 +16,7 @@ function Perfil() {
   const [cidadeUser, setCidadeUser] = useState(user?.cidade);
   const [estadoUser, setEstadoUser] = useState(user?.estado);
   const [emailUser, setEmailUser] = useState(user?.email);
+  const [senha, setSenha] = useState(user?.senha);
   const [whatsappUser, setWhatsappUser] = useState(user?.whatsapp);
 
   function changeImageUploadImage(e) {
@@ -33,22 +34,29 @@ function Perfil() {
     reader.readAsDataURL(upload);
   }
 
-  const saveChangeEdit = (e) => {
+  const saveChangeEdit = async (e) => {
     e.preventDefault();
 
     // HANDLE EDIT PROFILE
 
     var data = {
       img_view: upload ? uploadView : user?.img_view,
-      cidade: cidadeUser,
-      tipo_usuario: user?.tipo_usuario,
       img_file: upload ? upload : user?.img_file,
+      cidade: cidadeUser,
       email: emailUser,
       estado: estadoUser,
-      nome: nameUser,
-      senha: user?.senha,
+      nome: nameUser, 
       whatsapp: whatsappUser,
+      id: localStorage.getItem("ID_USUARIO_LOGADO"),
+      senha:senha
     };
+    console.log(data);
+    var config = {
+      headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
+    };  
+    const resp = await api.post("usuario/update", data,config);
+    
+    uploadImage();
 
     dispatch({
       type: "SET_USER",
@@ -58,6 +66,21 @@ function Perfil() {
     setUpload(null);
     setUploadView("");
   };
+
+  async function uploadImage() {
+    if (upload) {
+      let dataUpload = new FormData();
+      dataUpload.append("file", upload, upload.name);
+      var config = {
+        headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
+      }; 
+      await api.post(
+        `usuario/uploadFotoPerfil/${localStorage.getItem("ID_USUARIO_LOGADO")}`,
+        dataUpload,
+        config
+      );
+    }
+  }
 
   return (
     <div className="app-cadastro-pet">
@@ -146,12 +169,22 @@ function Perfil() {
                 placeholder="Seu cidade"
               />
             </div>
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Senha</p>
+              <input
+                onChange={(e) => setSenha(e.target.value)}
+                value={senha}
+                type="password"
+                placeholder="Sua senha"
+              />
+            </div>
           </div>
 
           {nameUser !== user?.nome ||
           emailUser !== user?.email ||
           estadoUser !== user?.estado ||
           cidadeUser !== user?.cidade ||
+          senha !== user?.senha ||
           whatsappUser !== user?.whatsapp ? (
             <button onClick={(e) => saveChangeEdit(e)}>Salvar</button>
           ) : (

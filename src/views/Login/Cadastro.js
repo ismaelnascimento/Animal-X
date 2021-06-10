@@ -104,6 +104,7 @@ function Cadastro() {
       var config = {
         headers: { Authorization: "bearer " + localStorage.getItem("TOKEN") },
       };
+      
       await api.post(
         `usuario/uploadFotoPerfil/${localStorage.getItem("ID_USUARIO_LOGADO")}`,
         dataUpload,

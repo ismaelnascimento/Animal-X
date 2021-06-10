@@ -6,7 +6,7 @@ import { useHistory, useLocation } from "react-router-dom";
 
 //
 import WhatsApp from "../../assets/icons/WhatsApp";
-
+import api from '../../service/service';
 //
 import "../../styles/Modal/Modal.css";
 
@@ -140,26 +140,32 @@ function CardPet(props) {
 
   const [situacao, setSituacao] = useState(props.situacao);
 
-  const updateSituacao = (situacaoUpdate) => {
-    // HANDLE UPDATE SITUAÇÃO // situacaoUpdate
-    setSituacao(situacaoUpdate);
-
-    // .then(() => {
-    //   setSituacao(props.situacao);
-    // });
+  const updateSituacao = async (situacaoUpdate) => {
+  
+    setSituacao(situacaoUpdate); 
+    console.log(localStorage.getItem('TOKEN'));
+    const headers = {
+      "Content-Type": "application/json;charset=utf-8",
+      "Access-Control-Allow-Origin": "*",
+    };
+    var config = { headers: { Authorization: "bearer " + localStorage.getItem('TOKEN') } };  
+    
+     const resp = await api.post(`animal/adotar/${36}`,config) ; 
+   
+     console.log(resp);
   };
 
   const BottomSituacao = () => (
     <div className="animalX--card__situacao">
       <button
         style={{
-          color: situacao === "Adotado" ? "#fff" : "",
+          color: situacao === "ADOTADO" ? "#fff" : "",
           background:
-            situacao === "Adotado"
+            situacao === "ADOTADO"
               ? "linear-gradient(90deg, rgba(239, 154, 19, 0.23) 32.71%, rgba(255, 255, 255, 0.71) 100%), #EF9A13"
               : "",
         }}
-        onClick={() => updateSituacao("Adotado")}
+        onClick={() => updateSituacao("ADOTADO")}
       >
         Adotado
       </button>
