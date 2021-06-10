@@ -1,3 +1,25 @@
+.animal-x-btn-top {
+  background-color: var(--color-primary);
+  color: #fff;
+  display: flex;
+  width: 48px;
+  transition: all 0.3s ease;
+  right: 9px;
+  bottom: 9px;
+  cursor: pointer;
+  height: 48px;
+  border-radius: 100%;
+  font-size: 18px;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 999;
+}
+
+.animal-x-btn-top:hover {
+  opacity: 0.8;
+}
+
 /* LOADING */
 
 .lds-ellipsis {

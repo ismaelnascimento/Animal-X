@@ -57,6 +57,9 @@ function CadastroPet() {
   const [peso, setPeso] = useState();
   const [tamanho, setTamanho] = useState("P");
   const [sexo, setSexo] = useState("Feminino");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
+
   const history = useHistory();
 
   const addPet = async (e) => {
@@ -72,6 +75,8 @@ function CadastroPet() {
       peso: peso,
       raca: raca,
       sexo: sexo,
+      estado: estado,
+      cidade: cidade,
       situacao: checkedSituacao ? "Disponivel" : "ADOTADO",
       tamanho: tamanho,
       unidadeTempo: typeIdade,
@@ -122,6 +127,8 @@ function CadastroPet() {
     setIdade("");
     setPeso("");
     setSexo("Feminino");
+    setCidade("");
+    setEstado("");
     history.push("/");
   };
 
@@ -274,6 +281,26 @@ function CadastroPet() {
                 value={especie}
                 type="text"
                 placeholder="Especie do seu pet ex: gato"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Estado</p>
+              <input
+                onChange={(e) => setEstado(e.target.value)}
+                value={estado}
+                type="text"
+                placeholder="Estado (localização) do seu pet ex: Ceará"
+              />
+            </div>
+
+            <div className="app-cadastro-pet__content-items__inputs-input">
+              <p>Cidade</p>
+              <input
+                onChange={(e) => setCidade(e.target.value)}
+                value={cidade}
+                type="text"
+                placeholder="Cidade (localização) do seu pet ex: Horizonte"
               />
             </div>
 

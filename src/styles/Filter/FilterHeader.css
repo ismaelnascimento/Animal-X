@@ -285,9 +285,8 @@
   }
   .animalX--filter__types-search {
     position: fixed;
-    bottom: 8px;
-    right: 8px;
-    left: auto;
+    bottom: 9px;
+    left: 9px;
     width: 48px;
     max-width: 48px;
     z-index: 999;

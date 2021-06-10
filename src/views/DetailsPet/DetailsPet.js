@@ -182,7 +182,7 @@ function DetailsPet() {
           <div>
             <IconLocal />
             <p>
-              {pet?.usuario?.cidade} {pet?.usuario?.estado}
+              {pet?.cidade} {pet?.estado}
             </p>
           </div>
           <div>
@@ -227,8 +227,8 @@ function DetailsPet() {
         <div className="app-details-pet__left-user">
           <img
             src={
-               pet?.usuario?.img_login
-                ? `https://photoanimalx.s3.us-east-2.amazonaws.com/${pet?.usuario?.img_login}` 
+              pet?.usuario?.img_login
+                ? `https://photoanimalx.s3.us-east-2.amazonaws.com/${pet?.usuario?.img_login}`
                 : "https://p16-sign-va.tiktokcdn.com/musically-maliva-obj/1594805258216454~c5_720x720.jpeg?x-expires=1623351600&x-signature=vLqvlvO%2B73%2F3ou%2BMZLqeCTsanD0%3D"
             }
             alt=""
