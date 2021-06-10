@@ -165,7 +165,9 @@ function DetailsPet() {
             <p>Sexo</p>
           </div>
           <div>
-            <h5>{pet?.idade}</h5>
+            <h5>
+              {pet?.idade} {pet?.unidadetempo}
+            </h5>
             <p>Idade</p>
           </div>
           <div>

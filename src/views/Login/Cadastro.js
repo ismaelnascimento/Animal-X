@@ -29,6 +29,8 @@ function Cadastro() {
   const [uploadView, setUploadView] = useState("");
   const [viewSenha, setViewSenha] = useState(false);
   const [whatsapp, setWhatsapp] = useState("");
+  const [cidade, setCidade] = useState("");
+  const [estado, setEstado] = useState("");
 
   const cadastro = async (e) => {
     e.preventDefault();
@@ -39,22 +41,16 @@ function Cadastro() {
       "Access-Control-Allow-Origin": "*",
     };
 
-    await fetch(
-      "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        user = {
-          img_view: uploadView,
-          cidade: data?.city,
-          img_file: upload ? upload : null,
-          email: email,
-          estado: data?.state,
-          nome: name,
-          senha: senha,
-          whatsapp: whatsapp,
-        };
-      });
+    user = {
+      img_view: uploadView,
+      cidade: cidade,
+      img_file: upload ? upload : null,
+      email: email,
+      estado: estado,
+      nome: name,
+      senha: senha,
+      whatsapp: whatsapp,
+    };
 
     const resp = await api.post("usuario/salvar", user, headers);
     const dataLogin = {
@@ -68,23 +64,17 @@ function Cadastro() {
 
     uploadImage();
 
-    await fetch(
-      "https://geolocation-db.com/json/e4f42070-ad2d-11eb-adf1-cf51da9b3410"
-    )
-      .then((response) => response.json())
-      .then((data) => {
-        user = {
-          img_view: uploadView,
-          tipo_usuario: respLogin.data.usuario.tipo_usuario,
-          img_file: upload ? upload : null,
-          cidade: data?.city,
-          email: email,
-          estado: data?.state,
-          nome: name,
-          senha: senha,
-          whatsapp: whatsapp,
-        };
-      });
+    user = {
+      img_view: uploadView,
+      tipo_usuario: respLogin.data.usuario.tipo_usuario,
+      img_file: upload ? upload : null,
+      cidade: cidade,
+      email: email,
+      estado: estado,
+      nome: name,
+      senha: senha,
+      whatsapp: whatsapp,
+    };
 
     uploadImage();
 
@@ -120,9 +110,29 @@ function Cadastro() {
       }
     }
   };
+  const handleCidade = (e) => {
+    if (whatsapp !== "" && cidade !== "" && name !== "") {
+      if (e.key === "Enter") {
+        document.getElementById("cadastro-estado").focus();
+      }
+    }
+  };
+  const handleEstado = (e) => {
+    if (whatsapp !== "" && cidade !== "" && estado !== "" && name !== "") {
+      if (e.key === "Enter") {
+        document.getElementById("cadastro-email").focus();
+      }
+    }
+  };
 
   const handleEmail = (e) => {
-    if (whatsapp !== "" && email !== "" && name !== "") {
+    if (
+      whatsapp !== "" &&
+      email !== "" &&
+      name !== "" &&
+      cidade !== "" &&
+      estado !== ""
+    ) {
       if (e.key === "Enter") {
         document.getElementById("cadastro-senha").focus();
       }
@@ -132,13 +142,20 @@ function Cadastro() {
   const handleWhatsapp = (e) => {
     if (whatsapp !== "" && name !== "") {
       if (e.key === "Enter") {
-        document.getElementById("cadastro-email").focus();
+        document.getElementById("cadastro-cidade").focus();
       }
     }
   };
 
   const handleSenha = (e) => {
-    if (email !== "" && whatsapp !== "" && senha !== "" && name !== "") {
+    if (
+      email !== "" &&
+      whatsapp !== "" &&
+      senha !== "" &&
+      name !== "" &&
+      cidade !== "" &&
+      estado !== ""
+    ) {
       if (e.key === "Enter") {
         cadastro(e);
       }
@@ -288,6 +305,40 @@ function Cadastro() {
         </div>
 
         <div className="animalX--login__input-form">
+          <p>Cidade</p>
+          <div>
+            <IconCidade />
+            <input
+              style={{ marginRight: "12px" }}
+              id="cadastro-cidade"
+              autoComplete="new-password"
+              placeholder="Sua cidade"
+              type="text"
+              value={cidade}
+              onKeyUp={(e) => handleCidade(e)}
+              onChange={(e) => setCidade(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="animalX--login__input-form">
+          <p>Estado</p>
+          <div>
+            <IconCidade />
+            <input
+              style={{ marginRight: "12px" }}
+              id="cadastro-estado"
+              autoComplete="new-password"
+              placeholder="Seu estado (localização)"
+              type="text"
+              value={estado}
+              onKeyUp={(e) => handleEstado(e)}
+              onChange={(e) => setEstado(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className="animalX--login__input-form">
           <p>E-mail</p>
           <div>
             <IconEmail />
@@ -335,7 +386,9 @@ function Cadastro() {
         email !== "" &&
         senha !== "" &&
         whatsapp !== "" &&
-        name !== "" ? (
+        name !== "" &&
+        cidade !== "" &&
+        estado !== "" ? (
           <button style={{ marginTop: 7 }} onClick={(e) => cadastro(e)}>
             Cadastrar
           </button>
@@ -350,6 +403,24 @@ function Cadastro() {
 }
 
 export default Cadastro;
+
+const IconCidade = () => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M8.53162 2.93677C10.7165 1.66727 13.402 1.68946 15.5664 2.99489C17.7095 4.32691 19.012 6.70418 18.9998 9.26144C18.95 11.8019 17.5533 14.19 15.8075 16.0361C14.7998 17.1064 13.6726 18.0528 12.4488 18.856C12.3228 18.9289 12.1848 18.9777 12.0415 19C11.9036 18.9941 11.7693 18.9534 11.6508 18.8814C9.78243 17.6746 8.14334 16.134 6.81233 14.334C5.69859 12.8314 5.06584 11.016 5 9.13442C4.99856 6.57225 6.34677 4.20627 8.53162 2.93677ZM9.79416 10.1948C10.1617 11.1008 11.0292 11.6918 11.9916 11.6918C12.6221 11.6964 13.2282 11.4438 13.6748 10.9905C14.1214 10.5371 14.3715 9.92064 14.3692 9.27838C14.3726 8.29804 13.7955 7.41231 12.9073 7.03477C12.0191 6.65723 10.995 6.86235 10.3133 7.55435C9.63159 8.24635 9.42664 9.28872 9.79416 10.1948Z"
+      fill="#130F26"
+    />
+    <ellipse opacity="0.4" cx="12" cy="21" rx="5" ry="1" fill="#130F26" />
+  </svg>
+);
 
 const IconWhatsapp = () => (
   <svg

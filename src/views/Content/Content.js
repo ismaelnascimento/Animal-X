@@ -78,7 +78,10 @@ function Content() {
         });
       } else {
         return getPets?.filter((pet) => {
-          return retira_acentos(pet?.idade) === filter?.state;
+          return (
+            retira_acentos(`${pet?.idade} ${pet?.unidadetempo}`) ===
+            retira_acentos(filter?.state)
+          );
         });
       }
     }
